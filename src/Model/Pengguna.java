@@ -77,14 +77,15 @@ public abstract class Pengguna implements GenderInterface{
         this.dob = dob;
     }
 
-    public char getGender() {
-        return gender;
+    public String getGender() {
+        
+        if(gender == GenderInterface.MALE){
+            return "Laki-laki";
+        }
+        return "Perempuan";
     }
 
     public void setGender(char gender) {
         this.gender = gender;
     }
-    
-    
-    
 }

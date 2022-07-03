@@ -14,9 +14,9 @@ public abstract class Staff {
     private String fullName;
     private String password;
     private String email;
-    private String role;
+    private StaffTypeEnum role;
 
-    public Staff(String username, String fullName, String password, String email, String role) {
+    public Staff(String username, String fullName, String password, String email, StaffTypeEnum role) {
         this.username = username;
         this.fullName = fullName;
         this.password = password;
@@ -56,11 +56,11 @@ public abstract class Staff {
         this.email = email;
     }
 
-    public String getRole() {
+    public StaffTypeEnum getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(StaffTypeEnum role) {
         this.role = role;
     }
     

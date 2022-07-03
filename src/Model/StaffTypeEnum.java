@@ -9,6 +9,6 @@ package Model;
  *
  * @author Felicia
  */
-public enum UserTypeEnum {
-    ADMIN, PENGGUNA, MANAGER;
+public enum StaffTypeEnum {
+    ADMIN, MANAGER;
 }

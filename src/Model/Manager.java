@@ -11,7 +11,7 @@ package Model;
  */
 public class Manager extends Staff {
 
-    public Manager(String username, String fullName, String password, String email, String role) {
+    public Manager(String username, String fullName, String password, String email, StaffTypeEnum role) {
         super(username, fullName, password, email, role);
     }
     
