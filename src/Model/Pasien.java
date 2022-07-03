@@ -16,6 +16,7 @@ public class Pasien extends Pengguna{
     
     private int idPasien;
     private int idAntrian;
+    ArrayList<Integer> idPemeriksaan = new ArrayList<>();
 
     public Pasien(int idPasien, int idAntrian, String firstName, String lastName, String email, String address, String phone, LocalDate dob, char gender) {
         super(firstName, lastName, email, address, phone, dob, gender);
@@ -37,6 +38,14 @@ public class Pasien extends Pengguna{
 
     public void setIdAntrian(int idAntrian) {
         this.idAntrian = idAntrian;
+    }
+
+    public ArrayList<Integer> getIdPemeriksaan() {
+        return idPemeriksaan;
+    }
+
+    public void setIdPemeriksaan(ArrayList<Integer> idPemeriksaan) {
+        this.idPemeriksaan = idPemeriksaan;
     }
     
 }
