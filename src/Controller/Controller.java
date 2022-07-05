@@ -1,8 +1,15 @@
 package Controller;
 
+import Model.Admin;
 import Model.Antrian;
+import Model.Dokter;
+import Model.Koas;
+import Model.Manager;
 import Model.Pasien;
 import Model.Pemeriksaan;
+import Model.Spesialis;
+import Model.Staff;
+import Model.UserTypeEnum;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -93,6 +100,140 @@ public class Controller {
         }
         return pasien;
     }
+    
+    // SELECT ALL from table dokter
+    public static ArrayList<Dokter> getAllDokter() {
+        ArrayList<Dokter> listDokter = new ArrayList<>();
+        conn.connect();
+        String query = "SELECT * FROM dokter";
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                Dokter dokter = new Dokter();
+                dokter.setIdDokter(rs.getInt("idDokter"));
+                dokter.setIdSpesialis(rs.getInt("idSpesialis"));
+                dokter.setFirstName(rs.getString("firtName"));
+                dokter.setLastName(rs.getString("lastName"));
+                dokter.setEmail(rs.getString("email"));
+                dokter.setAddress(rs.getString("address"));
+                dokter.setPhone(rs.getString("phone"));
+                dokter.setDob(rs.getDate("dob").toLocalDate());
+                dokter.setGender(rs.getString("gender").charAt(0));
+                dokter.setJamMulaiPrak(rs.getInt("jamMulaiPrak"));
+                dokter.setJamSelesaiPrak(rs.getInt("jamSelesaiPrak"));
+                dokter.setPendapatan(rs.getInt("pendapatan"));
+                listDokter.add(dokter);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return (listDokter);
+    }
+    
+    // SELECT ALL from table dokter BY first and last name
+    public static Dokter getDokter(String _firstName, String _lastName) {
+        Dokter dokter = new Dokter();
+        conn.connect();
+        String query = "SELECT * FROM dokter WHERE firstName='" + _firstName + "'&&lastName='" + _lastName + "'";
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                dokter.setIdDokter(rs.getInt("idDokter"));
+                dokter.setIdSpesialis(rs.getInt("idSpesialis"));
+                dokter.setFirstName(rs.getString("firtName"));
+                dokter.setLastName(rs.getString("lastName"));
+                dokter.setEmail(rs.getString("email"));
+                dokter.setAddress(rs.getString("address"));
+                dokter.setPhone(rs.getString("phone"));
+                dokter.setDob(rs.getDate("dob").toLocalDate());
+                dokter.setGender(rs.getString("gender").charAt(0));
+                dokter.setJamMulaiPrak(rs.getInt("jamMulaiPrak"));
+                dokter.setJamSelesaiPrak(rs.getInt("jamSelesaiPrak"));
+                dokter.setPendapatan(rs.getInt("pendapatan"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return dokter;
+    }
+    
+    // SELECT ALL from table koas
+    public static ArrayList<Koas> getAllKoas() {
+        ArrayList<Koas> listKoas = new ArrayList<>();
+        conn.connect();
+        String query = "SELECT * FROM koas";
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                Koas koas = new Koas();
+                koas.setIdKoas(rs.getInt("idKoas"));
+                koas.setFirstName(rs.getString("firstName"));
+                koas.setLastName(rs.getString("lastName"));
+                koas.setEmail(rs.getString("email"));
+                koas.setAddress(rs.getString("address"));
+                koas.setPhone(rs.getString("phone"));
+                koas.setDob(rs.getDate("dob").toLocalDate());
+                koas.setGender(rs.getString("gender").charAt(0));
+                koas.setUniversitas(rs.getString("universitas"));
+                listKoas.add(koas);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return (listKoas);
+    }
+    
+    // SELECT ALL from table koas BY first and last name
+    public static Koas getKoas(String _firstName, String _lastName) {
+        Koas koas = new Koas();
+        conn.connect();
+        String query = "SELECT * FROM koas WHERE firstName='" + _firstName + "'&&lastName='" + _lastName + "'";
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                koas.setIdKoas(rs.getInt("idKoas"));
+                koas.setFirstName(rs.getString("firstName"));
+                koas.setLastName(rs.getString("lastName"));
+                koas.setEmail(rs.getString("email"));
+                koas.setAddress(rs.getString("address"));
+                koas.setPhone(rs.getString("phone"));
+                koas.setDob(rs.getDate("dob").toLocalDate());
+                koas.setGender(rs.getString("gender").charAt(0));
+                koas.setUniversitas(rs.getString("universitas"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return koas;
+    }
+    
+    // SELECT ALL from table spesialis
+    public static ArrayList<Spesialis> getAllSpesialis() {
+        ArrayList<Spesialis> listSpesialis = new ArrayList<>();
+        conn.connect();
+        String query = "SELECT * FROM spesialis";
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                Spesialis spesialis = new Spesialis();
+                spesialis.setIdSpesialis(rs.getInt("idSpesialis"));
+                spesialis.setBidangSpesialis(rs.getString("bidangSpesialis"));
+                listSpesialis.add(spesialis);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return (listSpesialis);
+    }
+    
+    // SELECT ALL from table staff BY username and password (admin)
+    // SELECT ALL from table staff BY username and password (manager)
+    
     
     // SELECT ALL from table antrian BY spesialis
     public static ArrayList<Antrian> getAntrian(int _idSpesialis) {
