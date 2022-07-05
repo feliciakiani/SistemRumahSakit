@@ -13,10 +13,6 @@ public class Controller {
 
     static DatabaseHandler conn = new DatabaseHandler();
 
-    public Controller() {
-        conn.connect();
-    }
-
     // public static void tes() {
     //     System.out.println("conn");
     // }
@@ -24,6 +20,7 @@ public class Controller {
     // SELECT ALL from table pemeriksaan
     public static ArrayList<Pemeriksaan> getAllPemeriksaan() {
         ArrayList<Pemeriksaan> listPemeriksaan = new ArrayList<>();
+        conn.connect();
         String query = "SELECT * FROM pemeriksaan";
         try {
             Statement stmt = conn.con.createStatement();
@@ -48,6 +45,7 @@ public class Controller {
     // SELECT ALL from table pasien
     public static ArrayList<Pasien> getAllPasien() {
         ArrayList<Pasien> listPasien = new ArrayList<>();
+        conn.connect();
         String query = "SELECT * FROM pasien";
         try {
             Statement stmt = conn.con.createStatement();
@@ -74,6 +72,7 @@ public class Controller {
     // SELECT ALL from table pasien BY first and last name
     public static Pasien getPasien(String _firstName, String _lastName) {
         Pasien pasien = new Pasien();
+        conn.connect();
         String query = "SELECT * FROM pasien WHERE firstName='" + _firstName + "'&&lastName='" + _lastName + "'";
         try {
             Statement stmt = conn.con.createStatement();
@@ -98,7 +97,8 @@ public class Controller {
     // SELECT ALL from table antrian BY spesialis
     public static ArrayList<Antrian> getAntrian(int _idSpesialis) {
         ArrayList<Antrian> listAntrian = new ArrayList<>();
-        String query = "SELECT * FROM pasien WHERE idSpesialis='" + _idSpesialis + "'";
+        conn.connect();
+        String query = "SELECT * FROM antrian WHERE idSpesialis='" + _idSpesialis + "'";
         try {
             Statement stmt = conn.con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
@@ -118,10 +118,47 @@ public class Controller {
         return listAntrian;
     }
     
+    public static void main(String[] args) {
+        System.out.println("!UNTUK CEKKKK!");
+        System.out.println("");
+        
+        System.out.println("getAllPemeriksaan : ");
+        ArrayList<Pemeriksaan> listPemeriksaan = new ArrayList<>();
+        listPemeriksaan = getAllPemeriksaan();
+        
+        System.out.println("listPemeriksaan.get(0).getPenyakit(); = " + listPemeriksaan.get(0).getPenyakit());
+        
+        System.out.println("");
+        
+        System.out.println("getAllPasien :");
+        ArrayList<Pasien> listPasien = new ArrayList<>();
+        listPasien = getAllPasien();
+        
+        System.out.println("listPasien.get(2).getAddress() = " + listPasien.get(2).getAddress());
+        
+        
+        System.out.println("");
+        System.out.println("getPasien :");
+        Pasien pasien = new Pasien();
+        pasien = getPasien("Felicia", "Kiani");
+        
+        System.out.println("pasien.getDob() = " + pasien.getDob());
+        
+        
+        System.out.println("");
+        System.out.println("getAntrian :");
+        ArrayList<Antrian> listAntrian = new ArrayList<>();
+        listAntrian = getAntrian(1);
+        
+        System.out.println("listAntrian.get(0).getTanggalPesan() = " + listAntrian.get(0).getTanggalPesan());
+        
+    }
+    
 
     // // SELECT ALL from table users
     // public static ArrayList<User> getAllUsers() {
     //     ArrayList<User> users = new ArrayList<>();
+    //     conn.connect();
     //     String query = "SELECT * FROM users";
     //     try {
     //         Statement stmt = conn.con.createStatement();
@@ -142,6 +179,7 @@ public class Controller {
     // }
     // // SELECT WHERE
     // public static User getUser(String name, String address) {
+    //     conn.connect();
     //     String query = "SELECT * FROM users WHERE Name='" + name + "'&&Address='" + address + "'";
     //     User user = new User();
     //     try {
@@ -161,6 +199,7 @@ public class Controller {
     // }
     // // INSERT
     // public static boolean insertNewUser(User user) {
+    //     conn.connect();
     //     String query = "INSERT INTO users VALUES(?,?,?,?,?)";
     //     try {
     //         PreparedStatement stmt = conn.con.prepareStatement(query);
@@ -178,6 +217,7 @@ public class Controller {
     // }
     // // UPDATE
     // public static boolean updateUser(User user) {
+    //     conn.connect();
     //     String query = "UPDATE users SET Name='" + user.getName() + "', "
     //             + "Address='" + user.getAddress() + "', "
     //             + "Phone='" + user.getPhone() + "' "
@@ -193,6 +233,7 @@ public class Controller {
     // }
     // // DELETE
     // public static boolean deleteUser(String name) {
+    //     conn.connect();
     //     String query = "DELETE FROM users WHERE Name='" + name + "'";
     //     try {
     //         Statement stmt = conn.con.createStatement();
