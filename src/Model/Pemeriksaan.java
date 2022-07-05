@@ -18,6 +18,10 @@ public class Pemeriksaan {
     private int biaya;
     private LocalDate tangga;
 
+    public Pemeriksaan() {
+    }
+
+    
     public Pemeriksaan(int idPemeriksaan, int idDokter, int idKoas, int idPasien, String penyakit, int biaya, LocalDate tangga) {
         this.idPemeriksaan = idPemeriksaan;
         this.idDokter = idDokter;

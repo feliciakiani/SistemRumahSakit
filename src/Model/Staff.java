@@ -16,6 +16,10 @@ public abstract class Staff {
     private String email;
     private StaffTypeEnum role;
 
+    public Staff() {
+    }
+
+    
     public Staff(String username, String fullName, String password, String email, StaffTypeEnum role) {
         this.username = username;
         this.fullName = fullName;
