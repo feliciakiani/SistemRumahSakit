@@ -1,5 +1,8 @@
 package Controller;
 
+import Model.Antrian;
+import Model.Pasien;
+import Model.Pemeriksaan;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,14 +12,112 @@ import java.util.ArrayList;
 public class Controller {
 
     static DatabaseHandler conn = new DatabaseHandler();
-    
+
     public Controller() {
         conn.connect();
     }
-    
+
     // public static void tes() {
     //     System.out.println("conn");
     // }
+    
+    // SELECT ALL from table pemeriksaan
+    public static ArrayList<Pemeriksaan> getAllPemeriksaan() {
+        ArrayList<Pemeriksaan> listPemeriksaan = new ArrayList<>();
+        String query = "SELECT * FROM pemeriksaan";
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                Pemeriksaan pemeriksaan = new Pemeriksaan();
+                pemeriksaan.setIdPemeriksaan(rs.getInt("idPemeriksaan"));
+                pemeriksaan.setIdDokter(rs.getInt("idDokter"));
+                pemeriksaan.setIdPasien(rs.getInt("idPasien"));
+                pemeriksaan.setIdKoas(rs.getInt("idKoas"));
+                pemeriksaan.setBiaya(rs.getInt("biaya"));
+                pemeriksaan.setPenyakit(rs.getString("penyakit"));
+                pemeriksaan.setTanggal(rs.getDate("tanggal").toLocalDate());
+                listPemeriksaan.add(pemeriksaan);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return (listPemeriksaan);
+    }
+    
+    // SELECT ALL from table pasien
+    public static ArrayList<Pasien> getAllPasien() {
+        ArrayList<Pasien> listPasien = new ArrayList<>();
+        String query = "SELECT * FROM pasien";
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                Pasien pasien = new Pasien();
+                pasien.setIdPasien(rs.getInt("idPasien"));
+                pasien.setFirstName(rs.getString("firstName"));
+                pasien.setLastName(rs.getString("lastName"));
+                pasien.setEmail(rs.getString("email"));
+                pasien.setAddress(rs.getString("address"));
+                pasien.setPhone(rs.getString("phone"));
+                pasien.setDob(rs.getDate("dob").toLocalDate());
+                pasien.setGender(rs.getString("gender").charAt(0));
+                // ADA VAR PENYAKIT DI DB
+                listPasien.add(pasien);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return (listPasien);
+    }
+    
+    // SELECT ALL from table pasien BY first and last name
+    public static Pasien getPasien(String _firstName, String _lastName) {
+        Pasien pasien = new Pasien();
+        String query = "SELECT * FROM pasien WHERE firstName='" + _firstName + "'&&lastName='" + _lastName + "'";
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                pasien.setIdPasien(rs.getInt("idPasien"));
+                pasien.setFirstName(rs.getString("firstName"));
+                pasien.setLastName(rs.getString("lastName"));
+                pasien.setEmail(rs.getString("email"));
+                pasien.setAddress(rs.getString("address"));
+                pasien.setPhone(rs.getString("phone"));
+                pasien.setDob(rs.getDate("dob").toLocalDate());
+                pasien.setGender(rs.getString("gender").charAt(0));
+                // ADA VAR PENYAKIT DI DB
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return pasien;
+    }
+    
+    // SELECT ALL from table antrian BY spesialis
+    public static ArrayList<Antrian> getAntrian(int _idSpesialis) {
+        ArrayList<Antrian> listAntrian = new ArrayList<>();
+        String query = "SELECT * FROM pasien WHERE idSpesialis='" + _idSpesialis + "'";
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                Antrian antrian = new Antrian();
+                antrian.setIdAntrian(rs.getInt("idAntrian"));
+                antrian.setIdSpesialis(rs.getInt("idSpesialis"));
+                antrian.setIdDokter(rs.getInt("idDokter"));
+                antrian.setIdPasien(rs.getInt("idPasien"));
+                antrian.setTanggalPesan(rs.getDate("tanggalPesan").toLocalDate());
+                antrian.setTanggalPeriksa(rs.getDate("tanggalPeriksa").toLocalDate());
+                listAntrian.add(antrian);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return listAntrian;
+    }
+    
 
     // // SELECT ALL from table users
     // public static ArrayList<User> getAllUsers() {
@@ -39,7 +140,6 @@ public class Controller {
     //     }
     //     return (users);
     // }
-
     // // SELECT WHERE
     // public static User getUser(String name, String address) {
     //     String query = "SELECT * FROM users WHERE Name='" + name + "'&&Address='" + address + "'";
@@ -59,7 +159,6 @@ public class Controller {
     //     }
     //     return (user);
     // }
-    
     // // INSERT
     // public static boolean insertNewUser(User user) {
     //     String query = "INSERT INTO users VALUES(?,?,?,?,?)";
@@ -77,7 +176,6 @@ public class Controller {
     //         return (false);
     //     }
     // }
-
     // // UPDATE
     // public static boolean updateUser(User user) {
     //     String query = "UPDATE users SET Name='" + user.getName() + "', "
@@ -93,7 +191,6 @@ public class Controller {
     //         return (false);
     //     }
     // }
-
     // // DELETE
     // public static boolean deleteUser(String name) {
     //     String query = "DELETE FROM users WHERE Name='" + name + "'";
@@ -106,5 +203,4 @@ public class Controller {
     //         return (false);
     //     }
     // }
-
 }
