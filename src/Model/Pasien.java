@@ -18,6 +18,10 @@ public class Pasien extends Pengguna{
     private int idAntrian;
     ArrayList<Integer> idPemeriksaan = new ArrayList<>();
 
+    public Pasien() {
+    }
+
+    
     public Pasien(int idPasien, int idAntrian, String firstName, String lastName, String email, String address, String phone, LocalDate dob, char gender) {
         super(firstName, lastName, email, address, phone, dob, gender);
         this.idPasien = idPasien;

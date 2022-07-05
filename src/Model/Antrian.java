@@ -17,6 +17,10 @@ public class Antrian {
     private LocalDate tanggalPesan;
     private LocalDate tanggalPeriksa;
 
+    public Antrian() {
+    }
+
+    
     public Antrian(int idAntrian, int idSpesialis, int idDokter, int idPasien, LocalDate tanggalPesan, LocalDate tanggalPeriksa) {
         this.idAntrian = idAntrian;
         this.idSpesialis = idSpesialis;

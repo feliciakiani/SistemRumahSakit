@@ -19,6 +19,10 @@ public abstract class Pengguna implements GenderInterface{
     private LocalDate dob;
     private char gender;
 
+    public Pengguna() {
+    }
+
+    
     public Pengguna(String firstName, String lastName, String email, String address, String phone, LocalDate dob, char gender) {
         this.firstName = firstName;
         this.lastName = lastName;

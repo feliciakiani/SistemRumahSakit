@@ -13,6 +13,10 @@ public class Spesialis {
     private int idSpesialis;
     private String bidangSpesialis;
 
+    public Spesialis() {
+    }
+
+    
     public Spesialis(int idSpesialis, String bidangSpesialis) {
         this.idSpesialis = idSpesialis;
         this.bidangSpesialis = bidangSpesialis;
