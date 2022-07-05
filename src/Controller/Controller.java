@@ -10,6 +10,10 @@ public class Controller {
 
     static DatabaseHandler conn = new DatabaseHandler();
     
+    public Controller() {
+        conn.connect();
+    }
+    
     // public static void tes() {
     //     System.out.println("conn");
     // }
@@ -17,7 +21,6 @@ public class Controller {
     // // SELECT ALL from table users
     // public static ArrayList<User> getAllUsers() {
     //     ArrayList<User> users = new ArrayList<>();
-    //     conn.connect();
     //     String query = "SELECT * FROM users";
     //     try {
     //         Statement stmt = conn.con.createStatement();
@@ -39,7 +42,6 @@ public class Controller {
 
     // // SELECT WHERE
     // public static User getUser(String name, String address) {
-    //     conn.connect();
     //     String query = "SELECT * FROM users WHERE Name='" + name + "'&&Address='" + address + "'";
     //     User user = new User();
     //     try {
@@ -60,7 +62,6 @@ public class Controller {
     
     // // INSERT
     // public static boolean insertNewUser(User user) {
-    //     conn.connect();
     //     String query = "INSERT INTO users VALUES(?,?,?,?,?)";
     //     try {
     //         PreparedStatement stmt = conn.con.prepareStatement(query);
@@ -79,7 +80,6 @@ public class Controller {
 
     // // UPDATE
     // public static boolean updateUser(User user) {
-    //     conn.connect();
     //     String query = "UPDATE users SET Name='" + user.getName() + "', "
     //             + "Address='" + user.getAddress() + "', "
     //             + "Phone='" + user.getPhone() + "' "
@@ -96,8 +96,6 @@ public class Controller {
 
     // // DELETE
     // public static boolean deleteUser(String name) {
-    //     conn.connect();
-
     //     String query = "DELETE FROM users WHERE Name='" + name + "'";
     //     try {
     //         Statement stmt = conn.con.createStatement();
@@ -108,4 +106,5 @@ public class Controller {
     //         return (false);
     //     }
     // }
+
 }
