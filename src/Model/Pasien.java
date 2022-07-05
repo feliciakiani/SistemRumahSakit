@@ -1,28 +1,24 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Model;
 
 import java.time.LocalDate;
 
-/**
- *
- * @author Felicia
- */
 public class Pasien extends Pengguna{
     
     private int idPasien;
-    private int idAntrian;
+    private UserTypeEnum role;
 
     public Pasien() {
     }
-    
-    public Pasien(int idPasien, int idAntrian, String firstName, String lastName, String email, String address, String phone, LocalDate dob, char gender) {
+
+    public Pasien(int idPasien, UserTypeEnum role) {
+        this.idPasien = idPasien;
+        this.role = role;
+    }
+
+    public Pasien(int idPasien, UserTypeEnum role, String firstName, String lastName, String email, String address, String phone, LocalDate dob, char gender) {
         super(firstName, lastName, email, address, phone, dob, gender);
         this.idPasien = idPasien;
-        this.idAntrian = idAntrian;
+        this.role = role;
     }
 
     public int getIdPasien() {
@@ -33,12 +29,13 @@ public class Pasien extends Pengguna{
         this.idPasien = idPasien;
     }
 
-    public int getIdAntrian() {
-        return idAntrian;
+    public UserTypeEnum getRole() {
+        return role;
     }
 
-    public void setIdAntrian(int idAntrian) {
-        this.idAntrian = idAntrian;
+    public void setRole(UserTypeEnum role) {
+        this.role = role;
     }
+    
     
 }
