@@ -9,7 +9,7 @@ public class Pemeriksaan {
     private int idPasien;
     private String penyakit;
     private int biaya;
-    private LocalDate tangga;
+    private LocalDate tanggal;
 
     public Pemeriksaan() {
     }
@@ -22,7 +22,7 @@ public class Pemeriksaan {
         this.idPasien = idPasien;
         this.penyakit = penyakit;
         this.biaya = biaya;
-        this.tangga = tangga;
+        this.tanggal = tangga;
     }
 
     public int getIdPemeriksaan() {
@@ -74,11 +74,11 @@ public class Pemeriksaan {
     }
 
     public LocalDate getTangga() {
-        return tangga;
+        return tanggal;
     }
 
     public void setTangga(LocalDate tangga) {
-        this.tangga = tangga;
+        this.tanggal = tangga;
     }
     
     
