@@ -231,7 +231,7 @@ public class Controller {
         return (listSpesialis);
     }
     
-    // SELECT ALL from table staff BY username and password (admin)
+    // SELECT ALL from table staff BY username and password (admin) 
     // SELECT ALL from table staff BY username and password (manager) 
     
     
