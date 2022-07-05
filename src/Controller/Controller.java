@@ -232,7 +232,7 @@ public class Controller {
     }
     
     // SELECT ALL from table staff BY username and password (admin)
-    // SELECT ALL from table staff BY username and password (manager)
+    // SELECT ALL from table staff BY username and password (manager) 
     
     
     // SELECT ALL from table antrian BY spesialis
