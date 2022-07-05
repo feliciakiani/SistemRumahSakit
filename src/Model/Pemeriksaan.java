@@ -73,11 +73,11 @@ public class Pemeriksaan {
         this.biaya = biaya;
     }
 
-    public LocalDate getTangga() {
+    public LocalDate getTanggal() {
         return tanggal;
     }
 
-    public void setTangga(LocalDate tangga) {
+    public void setTanggal(LocalDate tangga) {
         this.tanggal = tangga;
     }
     
