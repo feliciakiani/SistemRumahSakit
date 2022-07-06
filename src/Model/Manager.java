@@ -8,5 +8,7 @@ public class Manager extends Staff {
         super(username, fullName, password, email, role);
     }
     
-    
+    public Manager(){
+        
+    }
 }
