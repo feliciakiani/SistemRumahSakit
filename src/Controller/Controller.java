@@ -23,7 +23,6 @@ public class Controller {
     // public static void tes() {
     //     System.out.println("conn");
     // }
-    
     // SELECT ALL from table pemeriksaan
     public static ArrayList<Pemeriksaan> getAllPemeriksaan() {
         ArrayList<Pemeriksaan> listPemeriksaan = new ArrayList<>();
@@ -48,7 +47,7 @@ public class Controller {
         }
         return (listPemeriksaan);
     }
-    
+
     // SELECT ALL from table pasien
     public static ArrayList<Pasien> getAllPasien() {
         ArrayList<Pasien> listPasien = new ArrayList<>();
@@ -75,7 +74,7 @@ public class Controller {
         }
         return (listPasien);
     }
-    
+
     // SELECT ALL from table pasien BY first and last name
     public static Pasien getPasien(String _firstName, String _lastName) {
         Pasien pasien = new Pasien();
@@ -100,7 +99,7 @@ public class Controller {
         }
         return pasien;
     }
-    
+
     // SELECT ALL from table dokter
     public static ArrayList<Dokter> getAllDokter() {
         ArrayList<Dokter> listDokter = new ArrayList<>();
@@ -113,7 +112,7 @@ public class Controller {
                 Dokter dokter = new Dokter();
                 dokter.setIdDokter(rs.getInt("idDokter"));
                 dokter.setIdSpesialis(rs.getInt("idSpesialis"));
-                dokter.setFirstName(rs.getString("firtName"));
+                dokter.setFirstName(rs.getString("firstName"));
                 dokter.setLastName(rs.getString("lastName"));
                 dokter.setEmail(rs.getString("email"));
                 dokter.setAddress(rs.getString("address"));
@@ -130,7 +129,7 @@ public class Controller {
         }
         return (listDokter);
     }
-    
+
     // SELECT ALL from table dokter BY first and last name
     public static Dokter getDokter(String _firstName, String _lastName) {
         Dokter dokter = new Dokter();
@@ -142,7 +141,7 @@ public class Controller {
             while (rs.next()) {
                 dokter.setIdDokter(rs.getInt("idDokter"));
                 dokter.setIdSpesialis(rs.getInt("idSpesialis"));
-                dokter.setFirstName(rs.getString("firtName"));
+                dokter.setFirstName(rs.getString("firstName"));
                 dokter.setLastName(rs.getString("lastName"));
                 dokter.setEmail(rs.getString("email"));
                 dokter.setAddress(rs.getString("address"));
@@ -158,7 +157,7 @@ public class Controller {
         }
         return dokter;
     }
-    
+
     // SELECT ALL from table koas
     public static ArrayList<Koas> getAllKoas() {
         ArrayList<Koas> listKoas = new ArrayList<>();
@@ -185,7 +184,7 @@ public class Controller {
         }
         return (listKoas);
     }
-    
+
     // SELECT ALL from table koas BY first and last name
     public static Koas getKoas(String _firstName, String _lastName) {
         Koas koas = new Koas();
@@ -210,7 +209,7 @@ public class Controller {
         }
         return koas;
     }
-    
+
     // SELECT ALL from table spesialis
     public static ArrayList<Spesialis> getAllSpesialis() {
         ArrayList<Spesialis> listSpesialis = new ArrayList<>();
@@ -230,10 +229,52 @@ public class Controller {
         }
         return (listSpesialis);
     }
-    
-    // SELECT ALL from table staff BY username and password (admin) 
-    // SELECT ALL from table staff BY username and password (manager) 
-    
+
+    // SELECT ALL from table staff BY username, password, role (admin)
+    public static Admin getAdmin(String _username, String _password, UserTypeEnum _role) {
+        Admin admin = new Admin();
+        conn.connect();
+        String query = "SELECT * FROM staff WHERE username='" + _username + "'&&password='" + _password + "'&&role='" + _role + "'";
+        if (_role.equals(Model.UserTypeEnum.ADMIN)) {
+            try {
+                Statement stmt = conn.con.createStatement();
+                ResultSet rs = stmt.executeQuery(query);
+                while (rs.next()) {
+                    admin.setUsername(rs.getString("username"));
+                    admin.setPassword(rs.getString("password"));
+                    admin.setFullName(rs.getString("fullname"));
+                    admin.setEmail(rs.getString("email"));
+                    admin.setRole(UserTypeEnum.ADMIN);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return admin;
+    }
+
+    // SELECT ALL from table staff BY username, password, role (manager) 
+    public static Manager getManager(String _username, String _password, UserTypeEnum _role) {
+        Manager manager = new Manager();
+        conn.connect();
+        String query = "SELECT * FROM staff WHERE username='" + _username + "'&&password='" + _password + "'&&role='" + _role + "'";
+        if (_role.equals(Model.UserTypeEnum.MANAGER)) {
+            try {
+                Statement stmt = conn.con.createStatement();
+                ResultSet rs = stmt.executeQuery(query);
+                while (rs.next()) {
+                    manager.setUsername(rs.getString("username"));
+                    manager.setPassword(rs.getString("password"));
+                    manager.setFullName(rs.getString("fullname"));
+                    manager.setEmail(rs.getString("email"));
+                    manager.setRole(UserTypeEnum.MANAGER);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return manager;
+    }
     
     // SELECT ALL from table antrian BY spesialis
     public static ArrayList<Antrian> getAntrian(int _idSpesialis) {
@@ -258,43 +299,89 @@ public class Controller {
         }
         return listAntrian;
     }
-    
+
     public static void main(String[] args) {
         System.out.println("!UNTUK CEKKKK!");
         System.out.println("");
-        
+
         System.out.println("getAllPemeriksaan : ");
         ArrayList<Pemeriksaan> listPemeriksaan = new ArrayList<>();
         listPemeriksaan = getAllPemeriksaan();
-        
+
         System.out.println("listPemeriksaan.get(0).getPenyakit(); = " + listPemeriksaan.get(0).getPenyakit());
-        
+
         System.out.println("");
-        
+
         System.out.println("getAllPasien :");
         ArrayList<Pasien> listPasien = new ArrayList<>();
         listPasien = getAllPasien();
-        
+
         System.out.println("listPasien.get(2).getAddress() = " + listPasien.get(2).getAddress());
-        
-        
+
         System.out.println("");
         System.out.println("getPasien :");
         Pasien pasien = new Pasien();
         pasien = getPasien("Felicia", "Kiani");
-        
+
         System.out.println("pasien.getDob() = " + pasien.getDob());
+
+        System.out.println("");
+        System.out.println("getAllDokter : ");
+        ArrayList<Dokter> listDokter = new ArrayList<>();
+        listDokter = getAllDokter();
+
+        System.out.println("listDokter.get(1).getPendapatan = " + listDokter.get(1).getPendapatan());
+
+        System.out.println("");
+        System.out.println("getDokter :");
+        Dokter dokter = new Dokter();
+        dokter = getDokter("Dr. Ani", "Sumarni");
+
+        System.out.println("dokter.getIdDokter() = " + dokter.getIdDokter());
+
+        System.out.println("");
+        System.out.println("getAllKoas : ");
+        ArrayList<Koas> listKoas = new ArrayList<>();
+        listKoas = getAllKoas();
+
+        System.out.println("listDokter.get(1).getUniversitas = " + listKoas.get(1).getUniversitas());
+
+        System.out.println("");
+        System.out.println("getKoas :");
+        Koas koas = new Koas();
+        koas = getKoas("Anto", "Sumanto");
+
+        System.out.println("koas.getPhone() = " + koas.getPhone());
         
+        System.out.println("");
+        System.out.println("getAdmin :");
+        Admin admin = new Admin();
+        admin = getAdmin("admin", "admin", Model.UserTypeEnum.ADMIN);
+
+        System.out.println("admin.getFullname() = " + admin.getFullName());
         
+        System.out.println("");
+        System.out.println("getManager :");
+        Manager manager = new Manager();
+        manager = getManager("manager", "manager", Model.UserTypeEnum.MANAGER);
+
+        System.out.println("manager.getFullname() = " + manager.getFullName());
+        
+        System.out.println("");
+        System.out.println("getAllSpesialis : ");
+        ArrayList<Spesialis> listSpesialis = new ArrayList<>();
+        listSpesialis = getAllSpesialis();
+
+        System.out.println("listSpesialis.get(2).getBidangSpesialis = " + listSpesialis.get(2).getBidangSpesialis());
+
         System.out.println("");
         System.out.println("getAntrian :");
         ArrayList<Antrian> listAntrian = new ArrayList<>();
         listAntrian = getAntrian(1);
-        
+
         System.out.println("listAntrian.get(0).getTanggalPesan() = " + listAntrian.get(0).getTanggalPesan());
-        
+
     }
-    
 
     // // SELECT ALL from table users
     // public static ArrayList<User> getAllUsers() {
