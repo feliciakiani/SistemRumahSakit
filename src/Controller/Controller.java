@@ -365,7 +365,7 @@ public class Controller {
         Manager manager = new Manager();
         manager = getManager("manager", "manager", Model.UserTypeEnum.MANAGER);
 
-        System.out.println("manager.getFullname() = " + manager.getFullName());
+        System.out.println("manager.getFullname() = " + manager.getFullName()); 
         
         System.out.println("");
         System.out.println("getAllSpesialis : ");
