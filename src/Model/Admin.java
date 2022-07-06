@@ -7,4 +7,8 @@ public class Admin extends Staff {
         super(username, fullName, password, email, role);
     }
     
+    public Admin(){
+        
+    }
+    
 }
