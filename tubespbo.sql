@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 06, 2022 at 12:14 PM
+-- Generation Time: Jul 07, 2022 at 02:21 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.1
 
@@ -73,14 +73,14 @@ CREATE TABLE `dokter` (
 --
 
 INSERT INTO `dokter` (`idDokter`, `idSpesialis`, `firstName`, `lastName`, `email`, `address`, `phone`, `dob`, `gender`, `jamMulaiPrak`, `jamSelesaiPrak`, `pendapatan`) VALUES
-(1, 1, 'Dr. Rahmat', 'Sutanto', 'rahmatsutanto@gmail.com', 'Jl. Pajajaran no. 100', '081231231234', '1982-07-15', 'M', 10, 19, 300000),
-(2, 1, 'Dr. Rita', 'Rosa', 'ritarosa@gmail.com', 'Jl. Pasirkaliki no. 50', '083211231234', '1971-03-24', 'F', 11, 18, 400000),
-(3, 2, 'Dr. Budi', 'Budiman', 'budibudiman@gmail.com', 'Jl. Pasirkoja no. 75', '083213211234', '1965-12-30', 'M', 13, 20, 500000),
-(4, 3, 'Dr. Ani', 'Sumarni', 'anisumarni@gmail.com', 'Jl. Cicendo no. 20', '083213213214', '1990-10-11', 'F', 12, 20, 350000),
-(5, 4, 'Dr. Agus', 'Toni', 'agustoni@gmail.com', 'Jl. Durian no. 5', '083214323214', '1988-12-21', 'M', 12, 19, 250000),
-(6, 4, 'Dr. Sandi', 'Gunawan', 'sandigun@gmail.com', 'Jl. Kopo no. 1', '081212341234', '1987-07-12', 'M', 10, 18, 400000),
-(7, 5, 'Dr. Cipto', 'Dharmakusuma', 'dharmacipto@gmail.com', 'Jl. Astana Anyar no. 28', '087743556162', '1979-12-12', 'M', 11, 20, 500000),
-(8, 6, 'Dr. Henny', 'Diana', 'hennydiana@gmail.com', 'Jl. Sumatra no. 3', '081803226567', '1992-08-02', 'F', 10, 19, 350000);
+(1, 1, 'Dr. Rahmat', 'Sutanto', 'rahmatsutanto@gmail.com', 'Jl. Pajajaran no. 100', '081231231234', '1982-07-15', 'M', 10, 19, 70000),
+(2, 1, 'Dr. Rita', 'Rosa', 'ritarosa@gmail.com', 'Jl. Pasirkaliki no. 50', '083211231234', '1971-03-24', 'F', 11, 18, 100000),
+(3, 2, 'Dr. Budi', 'Budiman', 'budibudiman@gmail.com', 'Jl. Pasirkoja no. 75', '083213211234', '1965-12-30', 'M', 13, 20, 150000),
+(4, 3, 'Dr. Ani', 'Sumarni', 'anisumarni@gmail.com', 'Jl. Cicendo no. 20', '083213213214', '1990-10-11', 'F', 12, 20, 2500000),
+(5, 4, 'Dr. Agus', 'Toni', 'agustoni@gmail.com', 'Jl. Durian no. 5', '083214323214', '1988-12-21', 'M', 12, 19, 1000000),
+(6, 4, 'Dr. Sandi', 'Gunawan', 'sandigun@gmail.com', 'Jl. Kopo no. 1', '081212341234', '1987-07-12', 'M', 10, 18, 0),
+(7, 5, 'Dr. Cipto', 'Dharmakusuma', 'dharmacipto@gmail.com', 'Jl. Astana Anyar no. 28', '087743556162', '1979-12-12', 'M', 11, 20, 100000),
+(8, 6, 'Dr. Henny', 'Diana', 'hennydiana@gmail.com', 'Jl. Sumatra no. 3', '081803226567', '1992-08-02', 'F', 10, 19, 250000);
 
 -- --------------------------------------------------------
 
@@ -124,22 +124,21 @@ CREATE TABLE `pasien` (
   `address` varchar(255) NOT NULL,
   `phone` varchar(255) NOT NULL,
   `dob` date NOT NULL,
-  `gender` char(1) NOT NULL,
-  `penyakit` varchar(255) NOT NULL
+  `gender` char(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `pasien`
 --
 
-INSERT INTO `pasien` (`idPasien`, `firstName`, `lastName`, `email`, `address`, `phone`, `dob`, `gender`, `penyakit`) VALUES
-(1, 'Hansel', 'Raphaelo', 'hanselrk@gmail.com', 'Jl. Muara no. 2', '081701799912', '2003-07-09', 'M', ''),
-(2, 'Vincent', 'Christian', 'vcl36@gmail.com', 'Jl. Astana Anyar no. 40', '081122799912', '2002-12-31', 'M', 'Saraf Terjepit'),
-(3, 'Michaela', 'Sheren', 'mikaela@gmail.com', 'Jl. Mekar Wangi no. 33', '081846129912', '2003-04-22', 'F', 'Mata Katarak'),
-(4, 'Felicia', 'Kiani', 'felicia@gmail.com', 'Jl. BKR no. 123', '081846996312', '2003-08-12', 'F', ''),
-(5, 'Audrey', 'Valencia', 'audreyvlc@gmail.com', 'Jl. Buah Batu no. 32', '081800998765', '2008-12-19', 'F', 'Demam Berdarah'),
-(6, 'Dewi', 'Ratnadewi', 'ratnadewi2@gmail.com', 'Jl. Astana Anyar no. 67', '081267896798', '1989-03-23', 'F', 'Cek Kehamilan'),
-(7, 'Joko', 'Kurnia', 'jokokurnia@gmail.com', 'Jl. Pasirluyu no. 7', '081876567565', '1950-10-19', 'M', 'EKG Jantung');
+INSERT INTO `pasien` (`idPasien`, `firstName`, `lastName`, `email`, `address`, `phone`, `dob`, `gender`) VALUES
+(1, 'Hansel', 'Raphaelo', 'hanselrk@gmail.com', 'Jl. Muara no. 2', '081701799912', '2003-07-09', 'M'),
+(2, 'Vincent', 'Christian', 'vcl36@gmail.com', 'Jl. Astana Anyar no. 40', '081122799912', '2002-12-31', 'M'),
+(3, 'Michaela', 'Sheren', 'mikaela@gmail.com', 'Jl. Mekar Wangi no. 33', '081846129912', '2003-04-22', 'F'),
+(4, 'Felicia', 'Kiani', 'felicia@gmail.com', 'Jl. BKR no. 123', '081846996312', '2003-08-12', 'F'),
+(5, 'Audrey', 'Valencia', 'audreyvlc@gmail.com', 'Jl. Buah Batu no. 32', '081800998765', '2008-12-19', 'F'),
+(6, 'Dewi', 'Ratnadewi', 'ratnadewi2@gmail.com', 'Jl. Astana Anyar no. 67', '081267896798', '1989-03-23', 'F'),
+(7, 'Joko', 'Kurnia', 'jokokurnia@gmail.com', 'Jl. Pasirluyu no. 7', '081876567565', '1950-10-19', 'M');
 
 -- --------------------------------------------------------
 
@@ -166,7 +165,9 @@ INSERT INTO `pemeriksaan` (`idPemeriksaan`, `idDokter`, `idPasien`, `idKoas`, `b
 (2, 1, 5, 2, 70000, 'Demam Berdarah', '2022-07-05'),
 (3, 8, 6, 4, 250000, 'Cek Kehamilan', '2022-07-06'),
 (4, 7, 7, 3, 100000, 'EKG Jantung', '2022-07-06'),
-(5, 3, 2, 2, 150000, 'Saraf Terjepit', '2022-07-06');
+(5, 3, 2, 2, 150000, 'Saraf Terjepit', '2022-07-06'),
+(6, 4, 1, 3, 2500000, 'Usus Buntu', '2022-07-07'),
+(7, 2, 4, 2, 100000, 'Diare', '2022-07-07');
 
 -- --------------------------------------------------------
 
@@ -299,7 +300,7 @@ ALTER TABLE `pasien`
 -- AUTO_INCREMENT for table `pemeriksaan`
 --
 ALTER TABLE `pemeriksaan`
-  MODIFY `idPemeriksaan` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `idPemeriksaan` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `spesialis`
