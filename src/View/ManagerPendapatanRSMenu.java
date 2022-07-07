@@ -9,6 +9,6 @@ package View;
  *
  * @author Felicia
  */
-public class ManagerMenu {
+public class ManagerPendapatanRSMenu {
     
 }
