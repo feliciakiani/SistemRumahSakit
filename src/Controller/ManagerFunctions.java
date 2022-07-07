@@ -5,6 +5,8 @@
  */
 package Controller;
 
+import Model.Dokter;
+import Model.Pasien;
 import Model.Pemeriksaan;
 import java.util.ArrayList;
 
@@ -28,14 +30,30 @@ public class ManagerFunctions {
     }
     
     public double lihatPendapatanDokter(String _firstName, String _lastName){
+        Dokter dokter = new Dokter();
+        dokter = Controller.getDokter(_firstName, _lastName);
         
+        return dokter.getPendapatan();
     }
     
     public double lihatPendapatanPerSpesialis(int _idSpesialis){
+        ArrayList<Dokter> listAllDokter = new ArrayList<>();
+        listAllDokter = Controller.getAllDokter();
+        double pendapatan = 0;
+        
+        for(Dokter dokter : listAllDokter){
+            if(dokter.getIdSpesialis() == _idSpesialis){
+                pendapatan += dokter.getPendapatan();
+            }
+        }
+        
+        return pendapatan;
         
     }
     
     public int lihatTotalTransaksi(){
+        
+        return Controller.getAllPemeriksaan().size();
         
     }
 }
