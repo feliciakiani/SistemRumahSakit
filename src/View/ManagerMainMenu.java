@@ -22,15 +22,15 @@ public class ManagerMainMenu {
     JFrame frame;
     JPanel panel;
     JLabel label;
-    JButton btnPendapatanRS, btnPendapatanDokter, btnTotalTransaksi, btnPendapatanSpesialis;
+    JButton btnPendapatanRS, btnPendapatanDokter, btnTotalTransaksi, btnPendapatanSpesialis, btnBackToMainMenu;
 
     public ManagerMainMenu() {
         
         frame = new JFrame("Menu Manager");
-        frame.setSize(500, 400);
+        frame.setSize(500, 600);
         
         panel = new JPanel();
-        panel.setSize(500, 400);
+        panel.setSize(500, 600);
         
         label = new JLabel("<html>Selamat datang " + "///NAMA///" + "<br>Silahkan pilih menu yang diinginkan</html>");
         label.setBounds(90, 20, 300, 40);
@@ -83,6 +83,18 @@ public class ManagerMainMenu {
             }
         });
         
+        btnBackToMainMenu = new JButton("Back to Main Menu");
+        btnBackToMainMenu.setBounds(100, 340, 150, 40);
+        btnBackToMainMenu.setBackground(Color.white);
+        btnBackToMainMenu.setForeground(Color.BLACK);
+        btnBackToMainMenu.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                frame.setVisible(false);
+                new MainMenu();
+            }
+        });
+        
         // Init
         panel.setLayout(null);
         panel.setVisible(true);
@@ -95,6 +107,7 @@ public class ManagerMainMenu {
         panel.add(btnPendapatanDokter);
         panel.add(btnTotalTransaksi);
         panel.add(btnPendapatanSpesialis);
+        panel.add(btnBackToMainMenu);
         panel.add(label);
         frame.add(panel);
     }
