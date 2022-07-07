@@ -10,5 +10,9 @@ package View;
  * @author Felicia
  */
 public class MainMenu {
+
+    public MainMenu() {
+        
+    }
     
 }
