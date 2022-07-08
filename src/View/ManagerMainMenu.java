@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -23,6 +24,8 @@ public class ManagerMainMenu {
     JPanel panel;
     JLabel labelSelamatDatang, labelPilihMenu;
     JButton btnPendapatanRS, btnPendapatanDokter, btnTotalTransaksi, btnPendapatanSpesialis, btnBackToMainMenu;
+
+    Controller.ManagerFunctions m = new Controller.ManagerFunctions();
 
     public ManagerMainMenu() {
 
@@ -45,7 +48,10 @@ public class ManagerMainMenu {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 frame.setVisible(false);
-                new ManagerPendapatanRSMenu();
+                double totalPendapatan = m.lihatTotalPendapatanRS();
+                JOptionPane.showMessageDialog(null, "Total pendapatan  Rumah Sakit : Rp" + totalPendapatan, "Total Pendapatan RS", JOptionPane.INFORMATION_MESSAGE);
+                
+                new ManagerMainMenu();
             }
         });
 
@@ -69,7 +75,10 @@ public class ManagerMainMenu {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 frame.setVisible(false);
-                new ManagerTotalTransaksiMenu();
+                double totalTransaksi = m.lihatTotalTransaksi();
+                JOptionPane.showMessageDialog(null, "Total transaksi dalam RS :" + totalTransaksi, "Total Transaksi RS", JOptionPane.INFORMATION_MESSAGE);
+                
+                new ManagerMainMenu();
             }
         });
 
