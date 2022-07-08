@@ -31,72 +31,70 @@ public class ManagerPendapatanDokterMenu {
     JRadioButton[] rbListDokter;
     ButtonGroup bgListDokter;
     JButton btnSearch;
-    String _firstName, _lastName;
-    
+    String _firstName="", _lastName="";
+
     Controller.ManagerFunctions m = new Controller.ManagerFunctions();
 
     public ManagerPendapatanDokterMenu() {
 
-        ArrayList<Dokter> listAllDokter = new ArrayList<>();
-        listAllDokter = Controller.Controller.getAllDokter();
-        
-        System.out.println(listAllDokter.get(0).getFirstName());
-        
-        int x = 90;
-        
+        final ArrayList<Dokter> listAllDokter = Controller.Controller.getAllDokter();
+        int y = 90;
+
         frame = new JFrame("Menu Manager");
-        frame.setSize(500, 600);
-        frame.setBackground(Color.CYAN);
+        frame.setSize(500, 700);
 
         panel = new JPanel();
-        panel.setSize(500, 600);
+        panel.setSize(500, 700);
+        panel.setBackground(Color.CYAN);
 
         labelThisMenu = new JLabel("Menu Pendapatan Dokter");
         labelThisMenu.setBounds(90, 20, 300, 40);
         labelThisMenu.setFont(new Font("Serif", Font.BOLD, 20));
-        labelPilihDokter = new JLabel("Silahkan pilih menu yang diinginkan");
+        labelPilihDokter = new JLabel("Silahkan pilih dokter yang diinginkan");
         labelPilihDokter.setBounds(90, 45, 300, 40);
 
         rbListDokter = new JRadioButton[Controller.Controller.getAllDokter().size()];
+        bgListDokter = new ButtonGroup();
+
         for (int i = 0; i < Controller.Controller.getAllDokter().size(); i++) {
             String name = listAllDokter.get(i).getFirstName() + " " + listAllDokter.get(i).getLastName();
-            rbListDokter[i].setText(name);
-            rbListDokter[i].setBounds(90, x, 100, 40);
-            x += 40;
+            rbListDokter[i] = new JRadioButton(name);
+            rbListDokter[i].setActionCommand(String.valueOf(i));
+            rbListDokter[i].setBounds(90, y, 200, 40);
+            rbListDokter[i].setBackground(Color.CYAN);
+            y += 40;
             rbListDokter[i].addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent ae) {
-//                    _firstName = listAllDokter.get(i).getFirstName();
-//                    _lastName = listAllDokter.get(i).getLastName();;
+                    int index = Integer.valueOf(ae.getActionCommand());
+                    _firstName = listAllDokter.get(index).getFirstName();
+                    _lastName = listAllDokter.get(index).getLastName();
                 }
             });
-        }
-
-        bgListDokter = new ButtonGroup();
-        for (int i = 0; i < Controller.Controller.getAllDokter().size(); i++) {
             bgListDokter.add(rbListDokter[i]);
         }
-        
+
         btnSearch = new JButton("Search");
-        btnSearch.setBounds(750, 530, 100, 50);
+        btnSearch.setBounds(180, 560, 100, 50);
         btnSearch.setBackground(Color.yellow);
         btnSearch.setFont(new Font("Serif", Font.BOLD, 20));
         btnSearch.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                double pendapatan = m.lihatPendapatanDokter(_firstName, _lastName);
-                JOptionPane.showMessageDialog (null, "Pendapatan dari " + _firstName + " " + _lastName + " : Rp" + pendapatan , "Pendapatan Dokter", JOptionPane.INFORMATION_MESSAGE);
-                
-                new ManagerMainMenu();
+                if (!_firstName.equals("") && !_lastName.equals("")) {
+                    frame.setVisible(false);
+                    double pendapatan = m.lihatPendapatanDokter(_firstName, _lastName);
+                    JOptionPane.showMessageDialog(null, "Pendapatan dari " + _firstName + " " + _lastName + " : Rp" + (int)pendapatan, "Pendapatan Dokter", JOptionPane.INFORMATION_MESSAGE);
+
+                    new ManagerMainMenu();
+                } else {
+                    frame.setVisible(false);
+                    JOptionPane.showMessageDialog(null, "Anda belum memililh dokter", "Pendapatan Dokter", JOptionPane.ERROR_MESSAGE);
+                    new ManagerPendapatanDokterMenu();
+                }
             }
         });
-
-        // Init
-        panel.setLayout(null);
-        panel.setVisible(true);
-        frame.setLocationRelativeTo(null);
-        frame.setLayout(null);
-        frame.setVisible(true);
+        
 
         //Add
         panel.add(btnSearch);
@@ -106,7 +104,14 @@ public class ManagerPendapatanDokterMenu {
         panel.add(labelThisMenu);
         panel.add(labelPilihDokter);
         frame.add(panel);
-
+        
+        
+        // Init
+        panel.setLayout(null);
+        panel.setVisible(true);
+        frame.setLocationRelativeTo(null);
+        frame.setLayout(null);
+        frame.setVisible(true);
     }
 
     public static void main(String[] args) {

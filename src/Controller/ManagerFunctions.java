@@ -6,7 +6,6 @@
 package Controller;
 
 import Model.Dokter;
-import Model.Pasien;
 import Model.Pemeriksaan;
 import java.util.ArrayList;
 

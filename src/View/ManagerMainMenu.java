@@ -75,7 +75,7 @@ public class ManagerMainMenu {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 frame.setVisible(false);
-                double totalTransaksi = m.lihatTotalTransaksi();
+                int totalTransaksi = m.lihatTotalTransaksi();
                 JOptionPane.showMessageDialog(null, "Total transaksi dalam RS :" + totalTransaksi, "Total Transaksi RS", JOptionPane.INFORMATION_MESSAGE);
                 
                 new ManagerMainMenu();
