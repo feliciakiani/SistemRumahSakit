@@ -14,6 +14,7 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Calendar;
 import java.util.Locale;
 
@@ -27,7 +28,7 @@ public class AdminFunctions {
 
     public boolean registDokter(Dokter dokter) throws SQLException {
         conn.connect();
-        String query = "INSERT INTO dokter VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO dokter VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
         try {
             PreparedStatement stmt = conn.con.prepareStatement(query);
             stmt.setInt(1, dokter.getIdDokter());
@@ -90,8 +91,43 @@ public class AdminFunctions {
         return (true);
     }
 
-    public void updateDataDokterKoas() {
-
+    public boolean updateDataDokter(Dokter dokter) {
+        conn.connect();
+        String query = "UPDATE dokter SET idDokter='" + dokter.getIdDokter() + "', idSpesialis='" +
+                dokter.getIdSpesialis() + "', firstName='" + dokter.getFirstName() + "', lastName='" +
+                dokter.getLastName() + "', email='" + dokter.getEmail() + "', address='" +
+                dokter.getAddress() + "', phone='" + dokter.getPhone() + "', dob='" +
+                dokter.getDob() + "', gender='" + dokter.getGender() + "', pendapatan='" +
+                dokter.getPendapatan() + "'";
+        try {
+            Statement stmt = conn.con.createStatement();
+            stmt.executeUpdate(query);
+            conn.disconnect();
+            return(true);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            conn.disconnect();
+            return(false);
+        }
+    }
+    
+    public boolean updateDataKoas(Koas koas){
+        conn.connect();
+        String query = "UPDATE dokter SET idKoas='" + koas.getIdKoas() + "', firstName='" +
+                koas.getFirstName() + "', lastName='" + koas.getLastName() +  "', email='" + 
+                koas.getEmail() + "', address='" + koas.getAddress() + "', phone='" + koas.getPhone() + 
+                "', dob='" + koas.getDob() + "', gender='" + koas.getGender() + "', universitas='" +
+                koas.getUniversitas() + "'";
+        try {
+            Statement stmt = conn.con.createStatement();
+            stmt.executeUpdate(query);
+            conn.disconnect();
+            return(true);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            conn.disconnect();
+            return(false);
+        }
     }
 
     public void updateJadwalPemeriksaan() {
