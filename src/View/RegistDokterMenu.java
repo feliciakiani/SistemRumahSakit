@@ -100,9 +100,9 @@ public class RegistDokterMenu {
                 int intIdSpesialis = Integer.parseInt(idSpesialis);
                 String dob = tfDob.getText();
                 Date dateDob = Date.valueOf(dob);
-                String jamMulai = tfJamMulai.getText();
                 String gender = tfGender.getText();
                 char charGender = gender.charAt(0);
+                String jamMulai = tfJamMulai.getText();
                 int intJamMulai = Integer.parseInt(jamMulai);
                 String jamSelesai = tfJamSelesai.getText();
                 int intJamSelesai = Integer.parseInt(jamSelesai);
