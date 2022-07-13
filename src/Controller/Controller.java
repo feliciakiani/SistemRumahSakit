@@ -325,7 +325,7 @@ public class Controller {
     
     public static boolean insertAntrian(Antrian antrian) {
          conn.connect();
-         String query = "INSERT INTO pemeriksaan VALUES(?,?,?,?,?,?,?)";
+         String query = "INSERT INTO antrian VALUES(?,?,?,?,?,?)";
          try {
              PreparedStatement stmt = conn.con.prepareStatement(query);
              stmt.setInt(1, antrian.getIdAntrian());

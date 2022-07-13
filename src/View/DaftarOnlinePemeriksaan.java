@@ -12,7 +12,6 @@ import java.time.*;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import static java.lang.Integer.parseInt;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -54,7 +53,6 @@ public class DaftarOnlinePemeriksaan {
     Controller.Controller c = new Controller.Controller();
     
     public DaftarOnlinePemeriksaan() {
-//        final Antrian antrian = new Antrian();
         final ArrayList<Dokter> listAllDokter = Controller.Controller.getAllDokter();
         int yDokter = 90;
 
@@ -94,36 +92,29 @@ public class DaftarOnlinePemeriksaan {
             bgListDokter.add(rbListDokter[i]);
         }
 
-        btnSearch = new JButton("Search");
-        btnSearch.setBounds(200, 480, 100, 50);
+        btnSearch = new JButton("Insert Database");
+        btnSearch.setBounds(140, 480, 200, 50);
         btnSearch.setBackground(Color.yellow);
         btnSearch.setFont(new Font("Serif", Font.BOLD, 20));
         btnSearch.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
+                tanggalPeriksa = new java.sql.Date( tanggalPeriksaSQL.getTime() ).toLocalDate();
                 if (!_firstNameDokter.equals("") && !_lastNameDokter.equals("") && tanggalPeriksa != null) {
                     frame.setVisible(false);
-//                    SimpleDateFormat formatNowDay = new SimpleDateFormat("dd");
-//                    SimpleDateFormat formatNowMonth = new SimpleDateFormat("MM");
-//                    SimpleDateFormat formatNowYear = new SimpleDateFormat("YYYY");
-//
-//                    int tglLahirDay = parseInt(formatNowDay.format(antrian.getTanggalPeriksa()));
-//                    int tglLahirMonth = parseInt(formatNowMonth.format(antrian.getTanggalPeriksa()))-1;
-//                    int tglLahirYear = parseInt(formatNowYear.format(antrian.getTanggalPeriksa()));
-//
-//                    datePickerTanggalPeriksa.getModel().setDate(tglLahirYear,tglLahirMonth,tglLahirDay);
-//                    datePickerTanggalPeriksa.getModel().setSelected(true);
-                   tanggalPeriksaSQL = java.sql.Date.valueOf(tanggalPeriksa);
                     if (tanggalPeriksaSQL.compareTo(new java.util.Date()) < 0) {
                         JOptionPane.showMessageDialog(null, "tanggal periksa tidak bisa sebelum hari ini", "Menu Daftar Online", JOptionPane.ERROR_MESSAGE);
                     } else {
-                        Antrian antrian2 = new Antrian(0, _idSpesialisDokter, _idDokter, 5, java.time.LocalDate.now(), tanggalPeriksa);
+                        Antrian antrian2 = new Antrian(0, _idSpesialisDokter, _idDokter, 5, java.time.LocalDate.now(), tanggalPeriksa); // kolom 4 ganti id pasien
                         c.insertAntrian(antrian2);
+                        JOptionPane.showMessageDialog(null, "insert antrian ke database berhasil", "Menu Daftar Online", JOptionPane.INFORMATION_MESSAGE);
+                        new PasienMainMenu();
                     }
                 } else {
                     frame.setVisible(false);
+                    System.out.println(tanggalPeriksa);
                     JOptionPane.showMessageDialog(null, "dokter atau tanggal periksa masih kosong", "Menu Daftar Online", JOptionPane.ERROR_MESSAGE);
-                    new LihatJadwaldanDataDokterMenu();
+                    new DaftarOnlinePemeriksaan();
                 }
             }
         });
@@ -141,7 +132,7 @@ public class DaftarOnlinePemeriksaan {
         datePickerTanggalPeriksa.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                tanggalPeriksa = (LocalDate) datePickerTanggalPeriksa.getModel().getValue();
+                tanggalPeriksaSQL = (Date) datePickerTanggalPeriksa.getModel().getValue();
             }
         });
         
