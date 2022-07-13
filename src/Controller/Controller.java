@@ -276,6 +276,28 @@ public class Controller {
         return manager;
     }
     
+    public static ArrayList<Antrian> getAllAntrian() {
+        ArrayList<Antrian> listAntrian = new ArrayList<>();
+        conn.connect();
+        String query = "SELECT * FROM antrian";
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                Antrian antrian = new Antrian();
+                antrian.setIdAntrian(rs.getInt("idAntrian"));
+                antrian.setIdSpesialis(rs.getInt("idSpesialis"));
+                antrian.setIdDokter(rs.getInt("idDokter"));
+                antrian.setIdPasien(rs.getInt("idPasien"));
+                antrian.setTanggalPesan(rs.getDate("tanggalPesan").toLocalDate());
+                listAntrian.add(antrian);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return (listAntrian);
+    }
+    
     // SELECT ALL from table antrian BY spesialis
     public static ArrayList<Antrian> getAntrian(int _idSpesialis) {
         ArrayList<Antrian> listAntrian = new ArrayList<>();
