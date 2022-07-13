@@ -16,13 +16,14 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Controller {
 
     static DatabaseHandler conn = new DatabaseHandler();
 
     // public static void tes() {
-    //     System.out.println("conn");
+    // System.out.println("conn");
     // }
     // SELECT ALL from table pemeriksaan
     public static ArrayList<Pemeriksaan> getAllPemeriksaan() {
@@ -235,7 +236,8 @@ public class Controller {
     public static Admin getAdmin(String _username, String _password, UserTypeEnum _role) {
         Admin admin = new Admin();
         conn.connect();
-        String query = "SELECT * FROM staff WHERE username='" + _username + "'&&password='" + _password + "'&&role='" + _role + "'";
+        String query = "SELECT * FROM staff WHERE username='" + _username + "'&&password='" + _password + "'&&role='"
+                + _role + "'";
         if (_role.equals(Model.UserTypeEnum.ADMIN)) {
             try {
                 Statement stmt = conn.con.createStatement();
@@ -254,11 +256,12 @@ public class Controller {
         return admin;
     }
 
-    // SELECT ALL from table staff BY username, password, role (manager) 
+    // SELECT ALL from table staff BY username, password, role (manager)
     public static Manager getManager(String _username, String _password, UserTypeEnum _role) {
         Manager manager = new Manager();
         conn.connect();
-        String query = "SELECT * FROM staff WHERE username='" + _username + "'&&password='" + _password + "'&&role='" + _role + "'";
+        String query = "SELECT * FROM staff WHERE username='" + _username + "'&&password='" + _password + "'&&role='"
+                + _role + "'";
         if (_role.equals(Model.UserTypeEnum.MANAGER)) {
             try {
                 Statement stmt = conn.con.createStatement();
@@ -276,7 +279,7 @@ public class Controller {
         }
         return manager;
     }
-    
+
     public static ArrayList<Antrian> getAllAntrian() {
         ArrayList<Antrian> listAntrian = new ArrayList<>();
         conn.connect();
@@ -298,7 +301,7 @@ public class Controller {
         }
         return (listAntrian);
     }
-    
+
     // SELECT ALL from table antrian BY spesialis
     public static ArrayList<Antrian> getAntrian(int _idSpesialis) {
         ArrayList<Antrian> listAntrian = new ArrayList<>();
@@ -322,25 +325,144 @@ public class Controller {
         }
         return listAntrian;
     }
-    
+
     public static boolean insertAntrian(Antrian antrian) {
-         conn.connect();
-         String query = "INSERT INTO antrian VALUES(?,?,?,?,?,?)";
-         try {
-             PreparedStatement stmt = conn.con.prepareStatement(query);
-             stmt.setInt(1, antrian.getIdAntrian());
-             stmt.setInt(2, antrian.getIdSpesialis());
-             stmt.setInt(3, antrian.getIdDokter());
-             stmt.setInt(4, antrian.getIdPasien());
-             stmt.setDate(5, java.sql.Date.valueOf(java.time.LocalDate.now()));
-             stmt.setDate(6, java.sql.Date.valueOf(antrian.getTanggalPeriksa()));
-             stmt.executeUpdate();
-             return (true);
-         } catch (SQLException e) {
-             e.printStackTrace();
-             return (false);
-         }
-     }
+        conn.connect();
+        String query = "INSERT INTO antrian VALUES(?,?,?,?,?,?)";
+        try {
+            PreparedStatement stmt = conn.con.prepareStatement(query);
+            stmt.setInt(1, antrian.getIdAntrian());
+            stmt.setInt(2, antrian.getIdSpesialis());
+            stmt.setInt(3, antrian.getIdDokter());
+            stmt.setInt(4, antrian.getIdPasien());
+            stmt.setDate(5, java.sql.Date.valueOf(java.time.LocalDate.now()));
+            stmt.setDate(6, java.sql.Date.valueOf(antrian.getTanggalPeriksa()));
+            stmt.executeUpdate();
+            return (true);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return (false);
+        }
+    }
+
+    public static boolean insertPasien(Pasien pasien) {
+        conn.connect();
+        String query = "INSERT INTO pasien (`firstName`,`lastName`,`email`,`password`) VALUES(?,?,?,?)";
+        try {
+            PreparedStatement stmt = conn.con.prepareStatement(query);
+            stmt.setString(1, pasien.getFirstName());
+            stmt.setString(2, pasien.getLastName());
+            stmt.setString(3, pasien.getEmail());
+            stmt.setString(4, pasien.getPassword());
+            stmt.executeUpdate();
+            return (true);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return (false);
+        }
+    }
+
+    public static int getIdByEmail(String email) {
+        conn.connect();
+        int id = 0;
+        String query = "SELECT * FROM pasien WHERE email='" + email + "'";
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                id = rs.getInt("idPasien");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return id;
+    }
+
+    public static String getNameById(int id) {
+        conn.connect();
+        String name = "";
+        String query = "SELECT * FROM pasien WHERE idPasien='" + id + "'";
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                name += rs.getString("firstName");
+                name += " ";
+                name += rs.getString("lastName");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return name;
+    }
+
+    public static String getRoleById(int id) {
+        conn.connect();
+        String role = "";
+        String query = "SELECT * FROM staff WHERE id='" + id + "'";
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                role = rs.getString("role");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return role;
+    }
+
+    public static int getIdByUsername(String username) {
+        conn.connect();
+        int id = 0;
+        String query = "SELECT * FROM staff WHERE username='" + username + "'";
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                id += rs.getInt("id");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return id;
+    }
+
+    public static HashMap<String, String> getEmailPasswordPair () {
+        HashMap<String, String> emailPasswordPair = new HashMap<String, String>();
+        conn.connect();
+        String query = "SELECT * FROM pasien";
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                String email = rs.getString("email");
+                String password = rs.getString("password");
+                emailPasswordPair.put(email, password);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return emailPasswordPair;
+    }
+
+    public static HashMap<String, String> getUsernamePasswordPair () {
+        HashMap<String, String> usernamePasswordPair = new HashMap<String, String>();
+        conn.connect();
+        String query = "SELECT * FROM staff";
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                String username = rs.getString("username");
+                String password = rs.getString("password");
+                usernamePasswordPair.put(username, password);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return usernamePasswordPair;
+    }
 
     public static void main(String[] args) {
         System.out.println("!UNTUK CEKKKK!");
@@ -394,21 +516,21 @@ public class Controller {
         koas = getKoas("Anto", "Sumanto");
 
         System.out.println("koas.getPhone() = " + koas.getPhone());
-        
+
         System.out.println("");
         System.out.println("getAdmin :");
         Admin admin = new Admin();
         admin = getAdmin("admin", "admin", Model.UserTypeEnum.ADMIN);
 
         System.out.println("admin.getFullname() = " + admin.getFullName());
-        
+
         System.out.println("");
         System.out.println("getManager :");
         Manager manager = new Manager();
         manager = getManager("manager", "manager", Model.UserTypeEnum.MANAGER);
 
-        System.out.println("manager.getFullname() = " + manager.getFullName()); 
-        
+        System.out.println("manager.getFullname() = " + manager.getFullName());
+
         System.out.println("");
         System.out.println("getAllSpesialis : ");
         ArrayList<Spesialis> listSpesialis = new ArrayList<>();
@@ -427,91 +549,92 @@ public class Controller {
 
     // // SELECT ALL from table users
     // public static ArrayList<User> getAllUsers() {
-    //     ArrayList<User> users = new ArrayList<>();
-    //     conn.connect();
-    //     String query = "SELECT * FROM users";
-    //     try {
-    //         Statement stmt = conn.con.createStatement();
-    //         ResultSet rs = stmt.executeQuery(query);
-    //         while (rs.next()) {
-    //             User user = new User();
-    //             user.setId(rs.getInt("ID"));
-    //             user.setName(rs.getString("Name"));
-    //             user.setAddress(rs.getString("Address"));
-    //             user.setPhone(rs.getString("Phone"));
-    //             user.setAge(rs.getInt("Age"));
-    //             users.add(user);
-    //         }
-    //     } catch (SQLException e) {
-    //         e.printStackTrace();
-    //     }
-    //     return (users);
+    // ArrayList<User> users = new ArrayList<>();
+    // conn.connect();
+    // String query = "SELECT * FROM users";
+    // try {
+    // Statement stmt = conn.con.createStatement();
+    // ResultSet rs = stmt.executeQuery(query);
+    // while (rs.next()) {
+    // User user = new User();
+    // user.setId(rs.getInt("ID"));
+    // user.setName(rs.getString("Name"));
+    // user.setAddress(rs.getString("Address"));
+    // user.setPhone(rs.getString("Phone"));
+    // user.setAge(rs.getInt("Age"));
+    // users.add(user);
+    // }
+    // } catch (SQLException e) {
+    // e.printStackTrace();
+    // }
+    // return (users);
     // }
     // // SELECT WHERE
     // public static User getUser(String name, String address) {
-    //     conn.connect();
-    //     String query = "SELECT * FROM users WHERE Name='" + name + "'&&Address='" + address + "'";
-    //     User user = new User();
-    //     try {
-    //         Statement stmt = conn.con.createStatement();
-    //         ResultSet rs = stmt.executeQuery(query);
-    //         while (rs.next()) {
-    //             user.setId(rs.getInt("ID"));
-    //             user.setName(rs.getString("Name"));
-    //             user.setAddress(rs.getString("Address"));
-    //             user.setPhone(rs.getString("Phone"));
-    //             user.setAge(rs.getInt("Age"));
-    //         }
-    //     } catch (SQLException e) {
-    //         e.printStackTrace();
-    //     }
-    //     return (user);
+    // conn.connect();
+    // String query = "SELECT * FROM users WHERE Name='" + name + "'&&Address='" +
+    // address + "'";
+    // User user = new User();
+    // try {
+    // Statement stmt = conn.con.createStatement();
+    // ResultSet rs = stmt.executeQuery(query);
+    // while (rs.next()) {
+    // user.setId(rs.getInt("ID"));
+    // user.setName(rs.getString("Name"));
+    // user.setAddress(rs.getString("Address"));
+    // user.setPhone(rs.getString("Phone"));
+    // user.setAge(rs.getInt("Age"));
+    // }
+    // } catch (SQLException e) {
+    // e.printStackTrace();
+    // }
+    // return (user);
     // }
     // // INSERT
     // public static boolean insertNewUser(User user) {
-    //     conn.connect();
-    //     String query = "INSERT INTO users VALUES(?,?,?,?,?)";
-    //     try {
-    //         PreparedStatement stmt = conn.con.prepareStatement(query);
-    //         stmt.setInt(1, user.getId());
-    //         stmt.setString(2, user.getName());
-    //         stmt.setString(3, user.getAddress());
-    //         stmt.setString(4, user.getPhone());
-    //         stmt.setInt(5, user.getAge());
-    //         stmt.executeUpdate();
-    //         return (true);
-    //     } catch (SQLException e) {
-    //         e.printStackTrace();
-    //         return (false);
-    //     }
+    // conn.connect();
+    // String query = "INSERT INTO users VALUES(?,?,?,?,?)";
+    // try {
+    // PreparedStatement stmt = conn.con.prepareStatement(query);
+    // stmt.setInt(1, user.getId());
+    // stmt.setString(2, user.getName());
+    // stmt.setString(3, user.getAddress());
+    // stmt.setString(4, user.getPhone());
+    // stmt.setInt(5, user.getAge());
+    // stmt.executeUpdate();
+    // return (true);
+    // } catch (SQLException e) {
+    // e.printStackTrace();
+    // return (false);
+    // }
     // }
     // // UPDATE
     // public static boolean updateUser(User user) {
-    //     conn.connect();
-    //     String query = "UPDATE users SET Name='" + user.getName() + "', "
-    //             + "Address='" + user.getAddress() + "', "
-    //             + "Phone='" + user.getPhone() + "' "
-    //             + "WHERE ID='" + user.getId() + "'";
-    //     try {
-    //         Statement stmt = conn.con.createStatement();
-    //         stmt.executeUpdate(query);
-    //         return (true);
-    //     } catch (SQLException e) {
-    //         e.printStackTrace();
-    //         return (false);
-    //     }
+    // conn.connect();
+    // String query = "UPDATE users SET Name='" + user.getName() + "', "
+    // + "Address='" + user.getAddress() + "', "
+    // + "Phone='" + user.getPhone() + "' "
+    // + "WHERE ID='" + user.getId() + "'";
+    // try {
+    // Statement stmt = conn.con.createStatement();
+    // stmt.executeUpdate(query);
+    // return (true);
+    // } catch (SQLException e) {
+    // e.printStackTrace();
+    // return (false);
+    // }
     // }
     // // DELETE
     // public static boolean deleteUser(String name) {
-    //     conn.connect();
-    //     String query = "DELETE FROM users WHERE Name='" + name + "'";
-    //     try {
-    //         Statement stmt = conn.con.createStatement();
-    //         stmt.executeUpdate(query);
-    //         return (true);
-    //     } catch (SQLException e) {
-    //         e.printStackTrace();
-    //         return (false);
-    //     }
+    // conn.connect();
+    // String query = "DELETE FROM users WHERE Name='" + name + "'";
+    // try {
+    // Statement stmt = conn.con.createStatement();
+    // stmt.executeUpdate(query);
+    // return (true);
+    // } catch (SQLException e) {
+    // e.printStackTrace();
+    // return (false);
+    // }
     // }
 }

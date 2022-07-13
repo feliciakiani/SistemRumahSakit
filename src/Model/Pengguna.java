@@ -4,9 +4,9 @@ import java.time.LocalDate;
 
 
 public abstract class Pengguna implements GenderInterface{
-    private String firstName;
-    private String lastName;
-    private String email;
+    protected String firstName;
+    protected String lastName;
+    protected String email;
     private String address;
     private String phone;
     private LocalDate dob;

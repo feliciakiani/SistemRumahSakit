@@ -2,10 +2,10 @@
 -- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jul 07, 2022 at 02:21 PM
--- Server version: 10.4.22-MariaDB
--- PHP Version: 8.1.1
+-- Host: 127.0.0.1:4306
+-- Generation Time: Jul 13, 2022 at 11:18 PM
+-- Server version: 10.4.20-MariaDB
+-- PHP Version: 8.0.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -121,24 +121,25 @@ CREATE TABLE `pasien` (
   `firstName` varchar(255) NOT NULL,
   `lastName` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `address` varchar(255) NOT NULL,
-  `phone` varchar(255) NOT NULL,
-  `dob` date NOT NULL,
-  `gender` char(1) NOT NULL
+  `password` varchar(255) NOT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  `phone` varchar(255) DEFAULT NULL,
+  `dob` date DEFAULT NULL,
+  `gender` char(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `pasien`
 --
 
-INSERT INTO `pasien` (`idPasien`, `firstName`, `lastName`, `email`, `address`, `phone`, `dob`, `gender`) VALUES
-(1, 'Hansel', 'Raphaelo', 'hanselrk@gmail.com', 'Jl. Muara no. 2', '081701799912', '2003-07-09', 'M'),
-(2, 'Vincent', 'Christian', 'vcl36@gmail.com', 'Jl. Astana Anyar no. 40', '081122799912', '2002-12-31', 'M'),
-(3, 'Michaela', 'Sheren', 'mikaela@gmail.com', 'Jl. Mekar Wangi no. 33', '081846129912', '2003-04-22', 'F'),
-(4, 'Felicia', 'Kiani', 'felicia@gmail.com', 'Jl. BKR no. 123', '081846996312', '2003-08-12', 'F'),
-(5, 'Audrey', 'Valencia', 'audreyvlc@gmail.com', 'Jl. Buah Batu no. 32', '081800998765', '2008-12-19', 'F'),
-(6, 'Dewi', 'Ratnadewi', 'ratnadewi2@gmail.com', 'Jl. Astana Anyar no. 67', '081267896798', '1989-03-23', 'F'),
-(7, 'Joko', 'Kurnia', 'jokokurnia@gmail.com', 'Jl. Pasirluyu no. 7', '081876567565', '1950-10-19', 'M');
+INSERT INTO `pasien` (`idPasien`, `firstName`, `lastName`, `email`, `password`, `address`, `phone`, `dob`, `gender`) VALUES
+(1, 'Hansel', 'Raphaelo', 'hanselrk@gmail.com', 'j+mTJdX321P7+udlvB6OKPYoy2kNA20l', 'Jl. Muara no. 2', '081701799912', '2003-07-09', 'M'),
+(2, 'Vincent', 'Christian', 'vcl36@gmail.com', 'j+mTJdX321P7+udlvB6OKPYoy2kNA20l', 'Jl. Astana Anyar no. 40', '081122799912', '2002-12-31', 'M'),
+(3, 'Michaela', 'Sheren', 'mikaela@gmail.com', 'j+mTJdX321P7+udlvB6OKPYoy2kNA20l', 'Jl. Mekar Wangi no. 33', '081846129912', '2003-04-22', 'F'),
+(4, 'Felicia', 'Kiani', 'felicia@gmail.com', 'j+mTJdX321P7+udlvB6OKPYoy2kNA20l', 'Jl. BKR no. 123', '081846996312', '2003-08-12', 'F'),
+(5, 'Audrey', 'Valencia', 'audreyvlc@gmail.com', 'j+mTJdX321P7+udlvB6OKPYoy2kNA20l', 'Jl. Buah Batu no. 32', '081800998765', '2008-12-19', 'F'),
+(6, 'Dewi', 'Ratnadewi', 'ratnadewi2@gmail.com', 'j+mTJdX321P7+udlvB6OKPYoy2kNA20l', 'Jl. Astana Anyar no. 67', '081267896798', '1989-03-23', 'F'),
+(7, 'Joko', 'Kurnia', 'jokokurnia@gmail.com', 'j+mTJdX321P7+udlvB6OKPYoy2kNA20l', 'Jl. Pasirluyu no. 7', '081876567565', '1950-10-19', 'M');
 
 -- --------------------------------------------------------
 
@@ -199,6 +200,7 @@ INSERT INTO `spesialis` (`idSpesialis`, `bidangSpesialis`) VALUES
 --
 
 CREATE TABLE `staff` (
+  `id` int(11) NOT NULL,
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `fullName` varchar(255) NOT NULL,
@@ -210,16 +212,11 @@ CREATE TABLE `staff` (
 -- Dumping data for table `staff`
 --
 
-INSERT INTO `staff` (`username`, `password`, `fullName`, `email`, `role`) VALUES
-('manager', 'manager', 'Saya Manager', 'managernihbos@gmail.com', 'MANAGER'),
-('admin', 'admin', 'Saya Admin', 'adminnihbos@gmail.com', 'ADMIN'),
-('user1', 'user1', 'Saya User 1', 'user1@gmail.com', 'PENGGUNA'),
-('user2', 'user2', 'Saya User 2', 'user2@gmail.com', 'PENGGUNA'),
-('user3', 'user3', 'Saya User 3', 'user3@gmail.com', 'PENGGUNA'),
-('user4', 'user4', 'Saya User 4', 'user4@gmail.com', 'PENGGUNA'),
-('user5', 'user5', 'Saya User 5', 'user5@gmail.com', 'PENGGUNA'),
-('admin1', 'admin1', 'Saya Admin 1', 'adminjuganih@gmail.com', 'ADMIN'),
-('admin2', 'admin2', 'Saya Admin 2', 'adminjunior@gmail.com', 'ADMIN');
+INSERT INTO `staff` (`id`, `username`, `password`, `fullName`, `email`, `role`) VALUES
+(1, 'manager', 'manager', 'Saya Manager', 'managernihbos@gmail.com', 'MANAGER'),
+(2, 'admin', 'admin', 'Saya Admin', 'adminnihbos@gmail.com', 'ADMIN'),
+(8, 'admin1', 'admin1', 'Saya Admin 1', 'adminjuganih@gmail.com', 'ADMIN'),
+(9, 'admin2', 'admin2', 'Saya Admin 2', 'adminjunior@gmail.com', 'ADMIN');
 
 --
 -- Indexes for dumped tables
@@ -269,6 +266,12 @@ ALTER TABLE `spesialis`
   ADD PRIMARY KEY (`idSpesialis`);
 
 --
+-- Indexes for table `staff`
+--
+ALTER TABLE `staff`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -294,7 +297,7 @@ ALTER TABLE `koas`
 -- AUTO_INCREMENT for table `pasien`
 --
 ALTER TABLE `pasien`
-  MODIFY `idPasien` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `idPasien` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `pemeriksaan`
@@ -307,6 +310,12 @@ ALTER TABLE `pemeriksaan`
 --
 ALTER TABLE `spesialis`
   MODIFY `idSpesialis` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `staff`
+--
+ALTER TABLE `staff`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Constraints for dumped tables

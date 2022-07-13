@@ -14,6 +14,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import Model.ActiveUserID;
+
 /**
  *
  * @author Felicia
@@ -25,17 +27,18 @@ public class PasienMainMenu {
     JLabel labelSelamatDatang, labelPilihMenu;
     JButton btnLihatUbahProfile, btnMelakukanPembayaran, btnLihatAntrian, btnDaftarOnline, btnLihatJadwalDataDokter, btnLihatRiwayatPemeriksaan, btnBackToMainMenu;
 
-//    Controller.ManagerFunctions m = new Controller.ManagerFunctions();
 
     public PasienMainMenu() {
         Controller.PasienFunction p = new Controller.PasienFunction();
+        Controller.Controller controller = new Controller.Controller();
         frame = new JFrame("Menu Pasien");
         frame.setSize(500, 585);
 
         panel = new JPanel();
         panel.setSize(500, 585);
 
-        labelSelamatDatang = new JLabel("<html>Selamat datang " + "<b>///NAMA///</b></html>");
+        ActiveUserID idPasien = ActiveUserID.ActiveUserID();
+        labelSelamatDatang = new JLabel("<html>Selamat datang " + controller.getNameById(idPasien.getUserID()));
         labelSelamatDatang.setBounds(90, 20, 300, 40);
         labelPilihMenu = new JLabel("Silahkan pilih menu yang diinginkan");
         labelPilihMenu.setBounds(90, 45, 300, 40);
@@ -60,8 +63,8 @@ public class PasienMainMenu {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 frame.setVisible(false);
-                p.melakukanPembayaran(3); //idPasien
-                new LihatPembayaranPasien(3); //idPasien
+                p.melakukanPembayaran(idPasien.getUserID()); //idPasien
+                new LihatPembayaranPasien(idPasien.getUserID()); //idPasien
             }
         });
 
@@ -73,7 +76,7 @@ public class PasienMainMenu {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 frame.setVisible(false);
-                p.lihatAntrianPasien(2); //idPasien
+                p.lihatAntrianPasien(idPasien.getUserID()); //idPasien
                 new PasienMainMenu();
             }
         });
@@ -110,7 +113,7 @@ public class PasienMainMenu {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 frame.setVisible(false);
-                p.lihatRiwayatPemeriksaan(2); //masukin id pasien
+                p.lihatRiwayatPemeriksaan(idPasien.getUserID()); //masukin id pasien
                 new PasienMainMenu();
             }
         });
