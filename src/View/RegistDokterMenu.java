@@ -110,10 +110,10 @@ public class RegistDokterMenu {
                 boolean registDokter;
                 registDokter = a.registDokter(intIdSpesialis, tfFirstName.getText(), tfLastName.getText(), tfEmail.getText(), tfAddress.getText(), tfPhone.getText(), dateDob, charGender, intJamMulai, intJamSelesai, intPendapatan);
                 if(registDokter == true){
-                    JOptionPane.showMessageDialog(null, "Registrasi Dokter", "Input berhasil!", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Input berhasil!", "Registrasi Dokter", JOptionPane.INFORMATION_MESSAGE);
                     new AdminMainMenu();
                 } else {
-                    JOptionPane.showMessageDialog(null, "Registrasi Dokter", "Input gagal!", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Input gagal!", "Input berhasil!", JOptionPane.ERROR_MESSAGE);
                     new AdminMainMenu();
                 }
             }
