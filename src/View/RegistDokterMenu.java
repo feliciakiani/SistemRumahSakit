@@ -113,7 +113,7 @@ public class RegistDokterMenu {
                     JOptionPane.showMessageDialog(null, "Input berhasil!", "Registrasi Dokter", JOptionPane.INFORMATION_MESSAGE);
                     new AdminMainMenu();
                 } else {
-                    JOptionPane.showMessageDialog(null, "Input gagal!", "Input berhasil!", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Input gagal!", "Registrasi Dokter", JOptionPane.ERROR_MESSAGE);
                     new AdminMainMenu();
                 }
             }
