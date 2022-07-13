@@ -92,14 +92,13 @@ public class DaftarOnlinePemeriksaan {
             bgListDokter.add(rbListDokter[i]);
         }
 
-        btnSearch = new JButton("Search");
-        btnSearch.setBounds(200, 480, 100, 50);
+        btnSearch = new JButton("Insert Database");
+        btnSearch.setBounds(140, 480, 200, 50);
         btnSearch.setBackground(Color.yellow);
         btnSearch.setFont(new Font("Serif", Font.BOLD, 20));
         btnSearch.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                System.out.println(tanggalPeriksaSQL);
                 tanggalPeriksa = new java.sql.Date( tanggalPeriksaSQL.getTime() ).toLocalDate();
                 if (!_firstNameDokter.equals("") && !_lastNameDokter.equals("") && tanggalPeriksa != null) {
                     frame.setVisible(false);

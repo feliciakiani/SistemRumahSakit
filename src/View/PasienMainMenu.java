@@ -87,7 +87,6 @@ public class PasienMainMenu {
             public void actionPerformed(ActionEvent ae) {
                 frame.setVisible(false);
                 new DaftarOnlinePemeriksaan();
-                new PasienMainMenu();
             }
         });
         
