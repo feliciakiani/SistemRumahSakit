@@ -62,6 +62,9 @@ public class DaftarOnlinePemeriksaan {
         panel = new JPanel();
         panel.setSize(500, 700);
         panel.setBackground(Color.CYAN);
+        panel = new JPanel();
+        panel.setSize(500, 700);
+        panel.setBackground(Color.CYAN);
 
         labelThisMenuDokter = new JLabel("Menu Pilih Dokter");
         labelThisMenuDokter.setBounds(90, 20, 300, 40);
