@@ -91,7 +91,7 @@ public class RegistDokterMenu {
         btSubmitRegistDokter = new JButton("Submit");
         btSubmitRegistDokter.setBounds(90, 400, 300, 40);
         btSubmitRegistDokter.setBackground(Color.YELLOW);
-        btSubmitRegistDokter.setForeground(Color.white);
+        btSubmitRegistDokter.setForeground(Color.black);
         btSubmitRegistDokter.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
@@ -106,18 +106,14 @@ public class RegistDokterMenu {
                 int intJamMulai = Integer.parseInt(jamMulai);
                 String jamSelesai = tfJamSelesai.getText();
                 int intJamSelesai = Integer.parseInt(jamSelesai);
+                int intPendapatan = 0;
                 boolean registDokter;
-                try {
-                    registDokter = a.registDokter(intIdSpesialis, tfFirstName.getText(), tfLastName.getText(), tfEmail.getText(), tfAddress.getText(), tfPhone.getText(), dateDob, charGender, intJamMulai, intJamSelesai);
-                    if(registDokter == true){
-                        JOptionPane.showMessageDialog(null, "Input berhasil!");
-                        new AdminMainMenu();
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Input gagal!");
-                        new AdminMainMenu();
-                    }
-                } catch (SQLException e) {
-                    e.printStackTrace();
+                registDokter = a.registDokter(intIdSpesialis, tfFirstName.getText(), tfLastName.getText(), tfEmail.getText(), tfAddress.getText(), tfPhone.getText(), dateDob, charGender, intJamMulai, intJamSelesai, intPendapatan);
+                if(registDokter == true){
+                    JOptionPane.showMessageDialog(null, "Registrasi Dokter", "Input berhasil!", JOptionPane.INFORMATION_MESSAGE);
+                    new AdminMainMenu();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Registrasi Dokter", "Input gagal!", JOptionPane.ERROR_MESSAGE);
                     new AdminMainMenu();
                 }
             }
