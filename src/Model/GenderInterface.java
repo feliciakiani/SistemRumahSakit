@@ -3,6 +3,6 @@ package Model;
 
 
 public interface GenderInterface {
-    final char MALE = 'm';
-    final char FEMALE = 'f';
+    final char MALE = 'M';
+    final char FEMALE = 'F';
 }

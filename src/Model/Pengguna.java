@@ -75,11 +75,11 @@ public abstract class Pengguna implements GenderInterface{
     }
 
     public String getGender() {
-        
-        if(gender == GenderInterface.MALE){
+        if(Character.compare(gender,GenderInterface.MALE) == 0){
             return "Laki-laki";
+        } else {
+            return "Perempuan";
         }
-        return "Perempuan";
     }
 
     public void setGender(char gender) {
