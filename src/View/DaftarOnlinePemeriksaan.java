@@ -42,7 +42,8 @@ public class DaftarOnlinePemeriksaan {
     JLabel labelThisMenuDokter, labelPilihDokter, labelTanggalPeriksa;
     JRadioButton[] rbListDokter;
     ButtonGroup bgListDokter;
-    Date tanggalPeriksa;
+    LocalDate tanggalPeriksa;
+    Date tanggalPeriksaSQL;
     JDatePickerImpl datePickerTanggalPeriksa;
     JButton btnSearch;
     String _firstNameDokter="", _lastNameDokter="";
@@ -112,11 +113,11 @@ public class DaftarOnlinePemeriksaan {
 //
 //                    datePickerTanggalPeriksa.getModel().setDate(tglLahirYear,tglLahirMonth,tglLahirDay);
 //                    datePickerTanggalPeriksa.getModel().setSelected(true);
-//                    tanggalPeriksa = java.sql.Date.valueOf(antrian.getTanggalPeriksa());
-                    if (tanggalPeriksa.compareTo(new java.util.Date()) < 0) {
+                   tanggalPeriksaSQL = java.sql.Date.valueOf(tanggalPeriksa);
+                    if (tanggalPeriksaSQL.compareTo(new java.util.Date()) < 0) {
                         JOptionPane.showMessageDialog(null, "tanggal periksa tidak bisa sebelum hari ini", "Menu Daftar Online", JOptionPane.ERROR_MESSAGE);
                     } else {
-                        Antrian antrian2 = new Antrian(0, _idSpesialisDokter, _idDokter, 5, java.time.LocalDate.now(), java.time.LocalDate.ofInstant(tanggalPeriksa.toInstant(), java.time.ZoneId.systemDefault()));
+                        Antrian antrian2 = new Antrian(0, _idSpesialisDokter, _idDokter, 5, java.time.LocalDate.now(), tanggalPeriksa);
                         c.insertAntrian(antrian2);
                     }
                 } else {
@@ -140,7 +141,7 @@ public class DaftarOnlinePemeriksaan {
         datePickerTanggalPeriksa.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                tanggalPeriksa = (Date) datePickerTanggalPeriksa.getModel().getValue();
+                tanggalPeriksa = (LocalDate) datePickerTanggalPeriksa.getModel().getValue();
             }
         });
         
