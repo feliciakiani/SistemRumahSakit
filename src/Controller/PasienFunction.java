@@ -34,14 +34,6 @@ public class PasienFunction {
         }
     }
     
-    public void openWebpage(String urlString) {
-        try {
-            Desktop.getDesktop().browse(new URL(urlString).toURI());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-    
     public void lihatRiwayatPemeriksaan(int _idPasien) {
         ArrayList<Pemeriksaan> listAllPemeriksaan = new ArrayList<>();
         listAllPemeriksaan = Controller.getAllPemeriksaan();

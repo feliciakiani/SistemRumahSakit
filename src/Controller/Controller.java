@@ -14,6 +14,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Date;
 import java.util.ArrayList;
 
 public class Controller {
@@ -321,6 +322,25 @@ public class Controller {
         }
         return listAntrian;
     }
+    
+    public static boolean insertAntrian(Antrian antrian) {
+         conn.connect();
+         String query = "INSERT INTO pemeriksaan VALUES(?,?,?,?,?,?,?)";
+         try {
+             PreparedStatement stmt = conn.con.prepareStatement(query);
+             stmt.setInt(1, antrian.getIdAntrian());
+             stmt.setInt(2, antrian.getIdSpesialis());
+             stmt.setInt(3, antrian.getIdDokter());
+             stmt.setInt(4, antrian.getIdPasien());
+             stmt.setDate(5, java.sql.Date.valueOf(java.time.LocalDate.now()));
+             stmt.setDate(6, java.sql.Date.valueOf(antrian.getTanggalPeriksa()));
+             stmt.executeUpdate();
+             return (true);
+         } catch (SQLException e) {
+             e.printStackTrace();
+             return (false);
+         }
+     }
 
     public static void main(String[] args) {
         System.out.println("!UNTUK CEKKKK!");

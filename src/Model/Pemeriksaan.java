@@ -15,14 +15,14 @@ public class Pemeriksaan {
     }
 
     
-    public Pemeriksaan(int idPemeriksaan, int idDokter, int idKoas, int idPasien, String penyakit, int biaya, LocalDate tangga) {
+    public Pemeriksaan(int idPemeriksaan, int idDokter, int idKoas, int idPasien, String penyakit, int biaya, LocalDate tanggal) {
         this.idPemeriksaan = idPemeriksaan;
         this.idDokter = idDokter;
         this.idKoas = idKoas;
         this.idPasien = idPasien;
         this.penyakit = penyakit;
         this.biaya = biaya;
-        this.tanggal = tangga;
+        this.tanggal = tanggal;
     }
 
     public int getIdPemeriksaan() {

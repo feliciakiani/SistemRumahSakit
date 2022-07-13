@@ -86,7 +86,7 @@ public class PasienMainMenu {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 frame.setVisible(false);
-                p.openWebpage("https://forms.gle/1NRtxbTadFCtsoVL7");
+                new DaftarOnlinePemeriksaan();
                 new PasienMainMenu();
             }
         });
