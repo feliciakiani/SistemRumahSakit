@@ -378,7 +378,25 @@ public class Controller {
         return id;
     }
 
-    public static String getNameById(int id) {
+    public static String getKoasNameById(int id) {
+        conn.connect();
+        String name = "";
+        String query = "SELECT * FROM koas WHERE idKoas='" + id + "'";
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                name += rs.getString("firstName");
+                name += " ";
+                name += rs.getString("lastName");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return name;
+    }
+    
+    public static String getPasienNameById(int id) {
         conn.connect();
         String name = "";
         String query = "SELECT * FROM pasien WHERE idPasien='" + id + "'";
