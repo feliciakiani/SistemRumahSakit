@@ -12,7 +12,7 @@ public class DatabaseHandler {
     public Connection con;
     private String driver = "com.mysql.cj.jdbc.Driver";
     // ubah server, username, sama password sesuai konfigurasi masing masing ygy
-    private String url = "jdbc:mysql://localhost/tubespbo";
+    private String url = "jdbc:mysql://localhost:4306/tubespbo";
     private String username = "root";
     private String password = "";
 
