@@ -69,7 +69,6 @@ public class LihatProfiledanUpdatePasien {
             public void actionPerformed(ActionEvent ae) {
                 frame.setVisible(false);
                 new UpdatePasien();
-                new PasienMainMenu();
             }
         });
         

@@ -361,7 +361,28 @@ public class Controller {
             return (false);
         }
     }
-
+    
+    public static boolean updatePasien(Pasien pasien) {
+        conn.connect();
+        String query = "UPDATE INTO pasien VALUES(?,?,?,?,?,?,?,?)";
+        try {
+            PreparedStatement stmt = conn.con.prepareStatement(query);
+            stmt.setInt(1, pasien.getIdPasien());
+            stmt.setString(2, pasien.getFirstName());
+            stmt.setString(3, pasien.getLastName());
+            stmt.setString(4, pasien.getEmail());
+            stmt.setString(5, pasien.getAddress());
+            stmt.setString(6, pasien.getPhone());
+            stmt.setDate(7, java.sql.Date.valueOf(pasien.getDob()));
+            stmt.setString(8, pasien.getGender());
+            stmt.executeUpdate();
+            return (true);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return (false);
+        }
+     }
+    
     public static int getIdByEmail(String email) {
         conn.connect();
         int id = 0;
