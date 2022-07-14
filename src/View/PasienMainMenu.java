@@ -38,7 +38,7 @@ public class PasienMainMenu {
         panel.setSize(500, 585);
 
         ActiveUserID idPasien = ActiveUserID.ActiveUserID();
-        labelSelamatDatang = new JLabel("<html>Selamat datang " + controller.getNameById(idPasien.getUserID()));
+        labelSelamatDatang = new JLabel("<html>Selamat datang " ); // + controller.getNameById(idPasien.getUserID())
         labelSelamatDatang.setBounds(90, 20, 300, 40);
         labelPilihMenu = new JLabel("Silahkan pilih menu yang diinginkan");
         labelPilihMenu.setBounds(90, 45, 300, 40);
