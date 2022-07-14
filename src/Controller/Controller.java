@@ -462,6 +462,24 @@ public class Controller {
         return id;
     }
 
+    public static String getNameById(int id) {
+        conn.connect();
+        String name = "";
+        String query = "SELECT * FROM pasien WHERE idPasien='" + id + "'";
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                name += rs.getString("firstName");
+                name += " ";
+                name += rs.getString("lastName");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return name;
+    }
+
     public static HashMap<String, String> getEmailPasswordPair () {
         HashMap<String, String> emailPasswordPair = new HashMap<String, String>();
         conn.connect();
