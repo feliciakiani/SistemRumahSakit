@@ -11,14 +11,23 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JTextField;
+
+import org.jdatepicker.impl.DateComponentFormatter;
+import org.jdatepicker.impl.JDatePanelImpl;
+import org.jdatepicker.impl.JDatePickerImpl;
+import org.jdatepicker.impl.SqlDateModel;
 
 /**
  *
@@ -29,7 +38,7 @@ public class RegistKoasMenu {
     JPanel panel;
     
     JLabel lbThisMenu, lbFirstName, lbLastName, lbEmail, lbAddress, lbPhone, lbDob, lbGender, lbUniversitas;
-    JTextField tfFirstName, tfLastName, tfEmail, tfAddress, tfPhone, tfDob, tfGender, tfUniversitas;
+    JTextField tfFirstName, tfLastName, tfEmail, tfAddress, tfPhone, tfUniversitas;
     JButton btSubmitRegistKoas;
     
     Controller.AdminFunctions a = new Controller.AdminFunctions();
@@ -73,10 +82,29 @@ public class RegistKoasMenu {
         tfAddress.setBounds(220, 160, 200, 20);
         tfPhone = new JTextField();
         tfPhone.setBounds(220, 190, 200, 20);
-        tfDob = new JTextField();
-        tfDob.setBounds(220, 220, 200, 20);
-        tfGender = new JTextField();
-        tfGender.setBounds(220, 250, 200, 20);
+
+        SqlDateModel model = new SqlDateModel();
+        Properties p = new Properties();
+        p.put("text.today", "Today");
+        p.put("text.month", "Month");
+        p.put("text.year", "Year");
+        JDatePanelImpl datePanel = new JDatePanelImpl(model, p);
+        JDatePickerImpl tglLahir = new JDatePickerImpl(datePanel, new DateComponentFormatter());
+        tglLahir.setBounds(220, 220, 200, 20);
+        frame.add(tglLahir);
+
+        JRadioButton priaBtn = new JRadioButton("Pria");
+        priaBtn.setBounds(220, 250, 100, 20);
+        priaBtn.setActionCommand("M");
+        frame.add(priaBtn);
+        JRadioButton wanitaBtn = new JRadioButton("Wanita");
+        wanitaBtn.setBounds(320,250,100,20);
+        wanitaBtn.setActionCommand("F");
+        frame.add(wanitaBtn);
+        ButtonGroup groupJK = new ButtonGroup();
+        groupJK.add(priaBtn);
+        groupJK.add(wanitaBtn);
+
         tfUniversitas = new JTextField();
         tfUniversitas.setBounds(220, 280, 200, 20);
         
@@ -87,19 +115,22 @@ public class RegistKoasMenu {
         btSubmitRegistKoas.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                frame.setVisible(false);
-                String dob = tfDob.getText();
-                Date dateDob = Date.valueOf(dob);
-                String gender = tfGender.getText();
-                char charGender = gender.charAt(0);
-                boolean registKoas;
-                registKoas = a.registKoas(tfFirstName.getText(), tfLastName.getText(), tfEmail.getText(), tfAddress.getText(), tfPhone.getText(), dateDob, charGender, tfUniversitas.getText());
-                if(registKoas == true){
-                    JOptionPane.showMessageDialog(null, "Input berhasil!", "Registrasi Koas", JOptionPane.INFORMATION_MESSAGE);
-                    new AdminMainMenu();
+                java.sql.Date dateDob = (java.sql.Date) tglLahir.getModel().getValue();
+                if (tfPhone.getText().isEmpty() || tfAddress.getText().isEmpty() || tfEmail.getText().isEmpty() || tfLastName.getText().isEmpty() || tfFirstName.getText().isEmpty() || tfLastName.getText().isEmpty() || tfUniversitas.getText().isEmpty() || (priaBtn.isSelected() && wanitaBtn.isSelected()) || dateDob == null) {
+                    JOptionPane.showMessageDialog(null, "Data Missing");
                 } else {
-                    JOptionPane.showMessageDialog(null, "Input gagal!", "Registrasi Koas", JOptionPane.ERROR_MESSAGE);
-                    new AdminMainMenu();
+                    frame.setVisible(false);
+                    String gender = groupJK.getSelection().getActionCommand();
+                    char charGender = gender.charAt(0);
+                    boolean registKoas;
+                    registKoas = a.registKoas(tfFirstName.getText(), tfLastName.getText(), tfEmail.getText(), tfAddress.getText(), tfPhone.getText(), dateDob, charGender, tfUniversitas.getText());
+                    if(registKoas == true){
+                        JOptionPane.showMessageDialog(null, "Input berhasil!", "Registrasi Koas", JOptionPane.INFORMATION_MESSAGE);
+                        new AdminMainMenu();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Input gagal!", "Registrasi Koas", JOptionPane.ERROR_MESSAGE);
+                        new AdminMainMenu();
+                    }
                 }
             }
         });
@@ -119,8 +150,6 @@ public class RegistKoasMenu {
         panel.add(tfEmail);
         panel.add(tfAddress);
         panel.add(tfPhone);
-        panel.add(tfDob);
-        panel.add(tfGender);
         panel.add(tfUniversitas);
         panel.add(btSubmitRegistKoas);
         frame.add(panel);
