@@ -29,13 +29,12 @@ public class UpdateDokterMenu {
 
     JFrame frame;
     JPanel panel;
-    JLabel labelThisMenu, labelPilihDokter, lbThisMenu, lbIdSpesialis, lbFirstName, lbLastName, lbEmail, lbAddress, lbPhone, lbDob, lbGender, lbJamMulai, lbJamSelesai;
-    JTextField tfIdSpesialis, tfFirstName, tfLastName, tfEmail, tfAddress, tfPhone, tfDob, tfGender, tfJamMulai, tfJamSelesai;
-    JButton btnSearch, btSubmitUpdateDokter;
+    JLabel labelThisMenu, labelPilihDokter, lbThisMenu;
+    JButton btnSearch;
     JRadioButton[] rbListDokter;
     ButtonGroup bgListDokter;
     String _firstName = "", _lastName = "", _email = "", _address = "", _phone = "", _dob = "", _gender = "";
-    int _idSpesialis = 0, _jamMulai = 0, _jamSelesai = 0;
+    int _idDokter, _idSpesialis = 0;
 
     Controller.AdminFunctions a = new Controller.AdminFunctions();
 
@@ -71,15 +70,15 @@ public class UpdateDokterMenu {
                 @Override
                 public void actionPerformed(ActionEvent ae) {
                     int index = Integer.valueOf(ae.getActionCommand());
+                    _idDokter = listAllDokter.get(index).getIdDokter();
                     _idSpesialis = listAllDokter.get(index).getIdSpesialis();
                     _firstName = listAllDokter.get(index).getFirstName();
                     _lastName = listAllDokter.get(index).getLastName();
                     _email = listAllDokter.get(index).getEmail();
                     _address = listAllDokter.get(index).getAddress();
                     _phone = listAllDokter.get(index).getPhone();
+                    _dob = String.valueOf(listAllDokter.get(index).getDob());
                     _gender = listAllDokter.get(index).getGender();
-                    _jamMulai = listAllDokter.get(index).getJamMulaiPrak();
-                    _jamSelesai = listAllDokter.get(index).getJamSelesaiPrak();
 
                 }
             });
@@ -95,118 +94,13 @@ public class UpdateDokterMenu {
             public void actionPerformed(ActionEvent ae) {
                 if (!_firstName.equals("") && !_lastName.equals("")) {
                     frame.setVisible(false);
-                    lbThisMenu = new JLabel("Menu Registrasi Dokter");
-                    lbThisMenu.setBounds(130, 20, 300, 40);
-                    lbThisMenu.setFont(new Font("Serif", Font.BOLD, 20));
-
-                    lbIdSpesialis = new JLabel("Id Spesialis :");
-                    lbIdSpesialis.setBounds(70, 60, 300, 40);
-                    lbFirstName = new JLabel("First Name :");
-                    lbFirstName.setBounds(70, 90, 300, 40);
-                    lbLastName = new JLabel("Last Name:");
-                    lbLastName.setBounds(70, 120, 300, 40);
-                    lbEmail = new JLabel("Email :");
-                    lbEmail.setBounds(70, 150, 300, 40);
-                    lbAddress = new JLabel("Address :");
-                    lbAddress.setBounds(70, 180, 300, 40);
-                    lbPhone = new JLabel("Phone :");
-                    lbPhone.setBounds(70, 210, 300, 40);
-                    lbDob = new JLabel("Date of Birth :");
-                    lbDob.setBounds(70, 240, 300, 40);
-                    lbGender = new JLabel("Gender :");
-                    lbGender.setBounds(70, 270, 300, 40);
-                    lbJamMulai = new JLabel("Jam Mulai Praktek :");
-                    lbJamMulai.setBounds(70, 300, 300, 40);
-                    lbJamSelesai = new JLabel("Jam Selesai Praktek :");
-                    lbJamSelesai.setBounds(70, 330, 300, 40);
-
-                    tfIdSpesialis = new JTextField(_idSpesialis);
-                    tfIdSpesialis.setBounds(220, 70, 200, 20);
-                    tfFirstName = new JTextField(_firstName);
-                    tfFirstName.setBounds(220, 100, 200, 20);
-                    tfLastName = new JTextField();
-                    tfLastName.setBounds(220, 130, 200, 20);
-                    tfEmail = new JTextField();
-                    tfEmail.setBounds(220, 160, 200, 20);
-                    tfAddress = new JTextField();
-                    tfAddress.setBounds(220, 190, 200, 20);
-                    tfPhone = new JTextField();
-                    tfPhone.setBounds(220, 220, 200, 20);
-                    tfDob = new JTextField();
-                    tfDob.setBounds(220, 250, 200, 20);
-                    tfGender = new JTextField();
-                    tfGender.setBounds(220, 280, 200, 20);
-                    tfJamMulai = new JTextField();
-                    tfJamMulai.setBounds(220, 310, 200, 20);
-                    tfJamSelesai = new JTextField();
-                    tfJamSelesai.setBounds(220, 340, 200, 20);
-
-                    btSubmitUpdateDokter = new JButton("Submit");
-                    btSubmitUpdateDokter.setBounds(90, 400, 300, 40);
-                    btSubmitUpdateDokter.setBackground(Color.YELLOW);
-                    btSubmitUpdateDokter.setForeground(Color.black);
-                    btSubmitUpdateDokter.addActionListener(new ActionListener() {
-                        @Override
-                        public void actionPerformed(ActionEvent ae) {
-                            frame.setVisible(false);
-                            String idSpesialis = tfIdSpesialis.getText();
-                            int intIdSpesialis = Integer.parseInt(idSpesialis);
-                            String dob = tfDob.getText();
-                            Date dateDob = Date.valueOf(dob);
-                            String gender = tfGender.getText();
-                            char charGender = gender.charAt(0);
-                            String jamMulai = tfJamMulai.getText();
-                            int intJamMulai = Integer.parseInt(jamMulai);
-                            String jamSelesai = tfJamSelesai.getText();
-                            int intJamSelesai = Integer.parseInt(jamSelesai);
-                            int intPendapatan = 0;
-                            boolean updateDokter;
-                            updateDokter = a.updateDataDokter(intIdSpesialis, tfFirstName.getText(), tfLastName.getText(), tfEmail.getText(), tfAddress.getText(), tfPhone.getText(), dateDob, charGender, intJamMulai, intJamSelesai, intPendapatan);
-                            if (updateDokter == true) {
-                                JOptionPane.showMessageDialog(null, "Input berhasil!", "Update Data Dokter", JOptionPane.INFORMATION_MESSAGE);
-                                new UpdateDokterMenu();
-                            } else {
-                                JOptionPane.showMessageDialog(null, "Input gagal!", "Update Data Dokter", JOptionPane.ERROR_MESSAGE);
-                                new UpdateDokterMenu();
-                            }
-
-                        }
-                    });
+                    new ShowFormUpdateDokter(_idDokter, _idSpesialis, _firstName, _lastName, _email, _address, _phone, _dob, _gender);
                 } else {
                     frame.setVisible(false);
                     JOptionPane.showMessageDialog(null, "Anda belum memililh dokter", "Update Data Dokter", JOptionPane.ERROR_MESSAGE);
                     new UpdateDokterMenu();
                 }
-                
-                panel.add(lbIdSpesialis);
-        panel.add(lbFirstName);
-        panel.add(lbLastName);
-        panel.add(lbEmail);
-        panel.add(lbAddress);
-        panel.add(lbPhone);
-        panel.add(lbDob);
-        panel.add(lbGender);
-        panel.add(lbJamMulai);
-        panel.add(lbJamSelesai);
-        panel.add(tfIdSpesialis);
-        panel.add(tfFirstName);
-        panel.add(tfLastName);
-        panel.add(tfEmail);
-        panel.add(tfAddress);
-        panel.add(tfPhone);
-        panel.add(tfDob);
-        panel.add(tfGender);
-        panel.add(tfJamMulai);
-        panel.add(tfJamSelesai);
-        panel.add(btSubmitUpdateDokter);
-        frame.add(panel);
 
-        // Init
-        panel.setLayout(null);
-        panel.setVisible(true);
-        frame.setLocationRelativeTo(null);
-        frame.setLayout(null);
-        frame.setVisible(true);
             }
 
         }
