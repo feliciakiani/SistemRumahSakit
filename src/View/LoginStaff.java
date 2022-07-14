@@ -57,7 +57,7 @@ public class LoginStaff extends JFrame {
                         if (controller.getRoleById(activeID.getUserID()).equals("MANAGER")) {
                             new ManagerMainMenu();
                         } else if (controller.getRoleById(activeID.getUserID()).equals("ADMIN")) {
-                            // new admin main menu
+                            new AdminMainMenu();
                         }
                     } else {
                         JOptionPane.showMessageDialog(null, "Informasi Login Tidak Sesuai!");

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package View;
 
 import Model.Dokter;
@@ -18,12 +13,11 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
-
 /**
  *
- * @author Sheren
+ * @author User
  */
-public class RiwayatPemeriksaanPilihDokterMenu {
+public class PilihDokter {
     JFrame frame;
     JPanel panel;
     JLabel labelThisMenu, labelPilihDokter;
@@ -31,23 +25,23 @@ public class RiwayatPemeriksaanPilihDokterMenu {
     ButtonGroup bgListDokter;
     JButton btnSearch;
     String _firstName="", _lastName="";
-    int _idDokter = 0;
-    int index = 0;
-    
-    Controller.AdminFunctions a = new Controller.AdminFunctions();
-    
-    public RiwayatPemeriksaanPilihDokterMenu(){
+    int index = -1;
+
+    Controller.PasienFunction p = new Controller.PasienFunction();
+
+    public PilihDokter() {
+
         final ArrayList<Dokter> listAllDokter = Controller.Controller.getAllDokter();
         int y = 90;
 
-        frame = new JFrame("Menu Admin");
+        frame = new JFrame("Menu Lihat Data Dokter");
         frame.setSize(500, 700);
 
         panel = new JPanel();
         panel.setSize(500, 700);
         panel.setBackground(Color.CYAN);
 
-        labelThisMenu = new JLabel("Menu Lihat Riwayat Pemeriksaan");
+        labelThisMenu = new JLabel("Menu Riwayat Pemeriksaan Dokter");
         labelThisMenu.setBounds(90, 20, 300, 40);
         labelThisMenu.setFont(new Font("Serif", Font.BOLD, 20));
         labelPilihDokter = new JLabel("Silahkan pilih dokter yang diinginkan");
@@ -66,29 +60,29 @@ public class RiwayatPemeriksaanPilihDokterMenu {
             rbListDokter[i].addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent ae) {
-                    index = Integer.valueOf(ae.getActionCommand());
-                    _firstName = listAllDokter.get(index).getFirstName();
-                    _lastName = listAllDokter.get(index).getLastName();
-                    _idDokter = listAllDokter.get(index).getIdDokter();
+                    index = Integer.valueOf(ae.getActionCommand()) + 1;
                 }
             });
             bgListDokter.add(rbListDokter[i]);
         }
-        
-        btnSearch = new JButton("Search");
+
+        btnSearch = new JButton("Lihat Riwayat Pemeriksaan");
         btnSearch.setBounds(180, 560, 100, 50);
         btnSearch.setBackground(Color.yellow);
         btnSearch.setFont(new Font("Serif", Font.BOLD, 20));
         btnSearch.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                if (!_firstName.equals("") && !_lastName.equals("")) {
-                    frame.setVisible(false);
-                    new RiwayatPemeriksaanMenu(_idDokter);
-                }               
+                if (index != -1) {
+                    frame.dispose();
+                    new RiwayatPemeriksaanMenu(index);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Anda belum memililh dokter", "Gagal!", JOptionPane.ERROR_MESSAGE);
+                }
             }
         });
         
+
         //Add
         panel.add(btnSearch);
         for (int i = 0; i < Controller.Controller.getAllDokter().size(); i++) {
@@ -106,9 +100,4 @@ public class RiwayatPemeriksaanPilihDokterMenu {
         frame.setLayout(null);
         frame.setVisible(true);
     }
-
-    public static void main(String[] args) {
-        new RiwayatPemeriksaanPilihDokterMenu();
-    }
-
 }

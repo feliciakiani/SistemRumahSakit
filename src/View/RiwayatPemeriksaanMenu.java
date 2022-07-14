@@ -6,7 +6,7 @@
 package View;
 
 import Model.Pemeriksaan;
-import View.RiwayatPemeriksaanPilihDokterMenu;
+import View.PilihDokter;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -60,6 +60,7 @@ public class RiwayatPemeriksaanMenu {
         btnSearch.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
+                frame.dispose();
                 new AdminMainMenu();
             }
         });
@@ -80,7 +81,7 @@ public class RiwayatPemeriksaanMenu {
     }
 
     public static void main(String[] args) {
-        new RiwayatPemeriksaanMenu(0);
+        new RiwayatPemeriksaanMenu(1);
     }
 
 }
