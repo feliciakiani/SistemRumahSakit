@@ -15,6 +15,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import Model.ActiveUserID;
+
 /**
  *
  * @author Sheren
@@ -28,6 +30,7 @@ public class AdminMainMenu {
     JButton btnRegistDokter, btnRegistKoas, btnRiwayatPemeriksaan, btnUpdateDokter, btnUpdateKoas, btnUpdateJadwal, btnBackToMainMenu;
 
     Controller.AdminFunctions a = new Controller.AdminFunctions();
+    Controller.Controller controller = new Controller.Controller();
     
     public AdminMainMenu(){
         
@@ -37,7 +40,8 @@ public class AdminMainMenu {
         panel = new JPanel();
         panel.setSize(500, 510);
 
-        labelSelamatDatang = new JLabel("<html>Selamat datang " + "<b>///NAMA///</b></html>");
+        ActiveUserID idManager = ActiveUserID.ActiveUserID();
+        labelSelamatDatang = new JLabel("<html>Selamat datang " + controller.getStaffNameById(idManager.getUserID()));
         labelSelamatDatang.setBounds(90, 20, 300, 40);
         labelPilihMenu = new JLabel("Silahkan pilih menu yang diinginkan");
         labelPilihMenu.setBounds(90, 45, 300, 40);
@@ -74,7 +78,7 @@ public class AdminMainMenu {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 frame.setVisible(false);
-                //new RiwayatPemeriksaanMenu();
+                new PilihDokter();
             }
         });
         

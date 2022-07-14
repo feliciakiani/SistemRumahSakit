@@ -68,7 +68,7 @@ public class LihatProfiledanUpdatePasien {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 frame.setVisible(false);
-                new UpdatePasien();
+                // new UpdatePasien();
                 new PasienMainMenu();
             }
         });
