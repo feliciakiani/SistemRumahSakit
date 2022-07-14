@@ -107,6 +107,7 @@ public class DaftarOnlinePemeriksaan {
                     frame.setVisible(false);
                     if (tanggalPeriksaSQL.compareTo(new java.util.Date()) < 0) {
                         JOptionPane.showMessageDialog(null, "tanggal periksa tidak bisa sebelum hari ini", "Menu Daftar Online", JOptionPane.ERROR_MESSAGE);
+                        new DaftarOnlinePemeriksaan();
                     } else {
                         Antrian antrian2 = new Antrian(0, _idSpesialisDokter, _idDokter, 5, java.time.LocalDate.now(), tanggalPeriksa); // kolom 4 ganti id pasien
                         c.insertAntrian(antrian2);
