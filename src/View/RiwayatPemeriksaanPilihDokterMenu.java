@@ -4,12 +4,12 @@
  * and open the template in the editor.
  */
 package View;
+
 import Model.Dokter;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Date;
 import java.util.ArrayList;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -18,26 +18,26 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
-import javax.swing.JTextField;
 
 /**
  *
  * @author Sheren
  */
-public class UpdateJadwalMenu {
+public class RiwayatPemeriksaanPilihDokterMenu {
     JFrame frame;
     JPanel panel;
-    JLabel labelThisMenu, labelPilihDokter, lbThisMenu;
-    JButton btnSearch;
+    JLabel labelThisMenu, labelPilihDokter;
     JRadioButton[] rbListDokter;
     ButtonGroup bgListDokter;
-    String _firstName = "", _lastName = "";
-    int _idDokter=0, _jamMulai=0, _jamSelesai=0;
-
+    JButton btnSearch;
+    String _firstName="", _lastName="";
+    int _idDokter = 0;
+    int index = 0;
+    
     Controller.AdminFunctions a = new Controller.AdminFunctions();
     
-    public UpdateJadwalMenu(){
-    final ArrayList<Dokter> listAllDokter = Controller.Controller.getAllDokter();
+    public RiwayatPemeriksaanPilihDokterMenu(){
+        final ArrayList<Dokter> listAllDokter = Controller.Controller.getAllDokter();
         int y = 90;
 
         frame = new JFrame("Menu Admin");
@@ -47,11 +47,11 @@ public class UpdateJadwalMenu {
         panel.setSize(500, 700);
         panel.setBackground(Color.CYAN);
 
-        labelThisMenu = new JLabel("Menu Update Jadwal Praktek Dokter");
-        labelThisMenu.setBounds(80, 20, 400, 40);
+        labelThisMenu = new JLabel("Menu Lihat Riwayat Pemeriksaan");
+        labelThisMenu.setBounds(90, 20, 300, 40);
         labelThisMenu.setFont(new Font("Serif", Font.BOLD, 20));
         labelPilihDokter = new JLabel("Silahkan pilih dokter yang diinginkan");
-        labelPilihDokter.setBounds(80, 45, 300, 40);
+        labelPilihDokter.setBounds(90, 45, 300, 40);
 
         rbListDokter = new JRadioButton[Controller.Controller.getAllDokter().size()];
         bgListDokter = new ButtonGroup();
@@ -66,16 +66,14 @@ public class UpdateJadwalMenu {
             rbListDokter[i].addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent ae) {
-                    int index = Integer.valueOf(ae.getActionCommand());
-                    _idDokter = listAllDokter.get(index).getIdDokter();
+                    index = Integer.valueOf(ae.getActionCommand());
                     _firstName = listAllDokter.get(index).getFirstName();
                     _lastName = listAllDokter.get(index).getLastName();
-                    _jamMulai = listAllDokter.get(index).getJamMulaiPrak();
-                    _jamSelesai = listAllDokter.get(index).getJamSelesaiPrak();
+                    _idDokter = listAllDokter.get(index).getIdDokter();
                 }
             });
             bgListDokter.add(rbListDokter[i]);
-        }   
+        }
         
         btnSearch = new JButton("Search");
         btnSearch.setBounds(180, 560, 100, 50);
@@ -86,29 +84,22 @@ public class UpdateJadwalMenu {
             public void actionPerformed(ActionEvent ae) {
                 if (!_firstName.equals("") && !_lastName.equals("")) {
                     frame.setVisible(false);
-                    new ShowFormUpdateJadwal(_idDokter, _jamMulai, _jamSelesai);
-                } else {
-                    frame.setVisible(false);
-                    JOptionPane.showMessageDialog(null, "Anda belum memililh dokter", "Update Jadwal Pemeriksaan Dokter", JOptionPane.ERROR_MESSAGE);
-                    new UpdateJadwalMenu();
-                }
+                    new RiwayatPemeriksaanMenu(_idDokter);
+                }               
             }
-
-        }
-        );
-    
-    //Add
+        });
+        
+        //Add
         panel.add(btnSearch);
-        for (int i = 0;
-                i < Controller.Controller.getAllDokter()
-                        .size(); i++) {
+        for (int i = 0; i < Controller.Controller.getAllDokter().size(); i++) {
             panel.add(rbListDokter[i]);
         }
         panel.add(labelThisMenu);
         panel.add(labelPilihDokter);
         frame.add(panel);
-
-//        // Init
+        
+        
+        // Init
         panel.setLayout(null);
         panel.setVisible(true);
         frame.setLocationRelativeTo(null);
@@ -117,6 +108,7 @@ public class UpdateJadwalMenu {
     }
 
     public static void main(String[] args) {
-        new UpdateJadwalMenu();
+        new RiwayatPemeriksaanPilihDokterMenu();
     }
+
 }
