@@ -1,9 +1,9 @@
 package Main;
 
-import Controller.*;
+import View.Login;
 
 public class main {
     public static void main(String[] args) {
-        Controller controller =  new Controller();
+        new Login();
     }
 }
