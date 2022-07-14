@@ -14,6 +14,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import Model.ActiveUserID;
+
 /**
  *
  * @author Felicia
@@ -26,6 +28,7 @@ public class ManagerMainMenu {
     JButton btnPendapatanRS, btnPendapatanDokter, btnTotalTransaksi, btnPendapatanSpesialis, btnBackToMainMenu;
 
     Controller.ManagerFunctions m = new Controller.ManagerFunctions();
+    Controller.Controller controller = new Controller.Controller();
 
     public ManagerMainMenu() {
 
@@ -35,7 +38,8 @@ public class ManagerMainMenu {
         panel = new JPanel();
         panel.setSize(500, 485);
 
-        labelSelamatDatang = new JLabel("<html>Selamat datang " + "<b>///NAMA///</b></html>");
+        ActiveUserID idManager = ActiveUserID.ActiveUserID();
+        labelSelamatDatang = new JLabel("<html>Selamat datang " + controller.getStaffNameById(idManager.getUserID()));
         labelSelamatDatang.setBounds(90, 20, 300, 40);
         labelPilihMenu = new JLabel("Silahkan pilih menu yang diinginkan");
         labelPilihMenu.setBounds(90, 45, 300, 40);

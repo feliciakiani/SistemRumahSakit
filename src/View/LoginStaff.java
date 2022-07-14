@@ -48,15 +48,15 @@ public class LoginStaff extends JFrame {
                 if (textUsername.getText().isEmpty() || password.isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Ada Data Kosong!");
                 } else {
-                    if (controller.getUsernamePasswordPair().get(textUsername.getText()) == password) {
+                    if (controller.getUsernamePasswordPair().get(textUsername.getText()).equals(password)) {
                         int id = controller.getIdByUsername(textUsername.getText());
                         ActiveUserID activeID = ActiveUserID.ActiveUserID();
                         activeID.setUserID(id);
                         JOptionPane.showMessageDialog(null, "Berhasil Login!");
                         dispose();
-                        if (controller.getRoleById(activeID.getUserID()) == "MANAGER") {
+                        if (controller.getRoleById(activeID.getUserID()).equals("MANAGER")) {
                             new ManagerMainMenu();
-                        } else if (controller.getRoleById(activeID.getUserID()) == "ADMIN") {
+                        } else if (controller.getRoleById(activeID.getUserID()).equals("ADMIN")) {
                             // new admin main menu
                         }
                     } else {

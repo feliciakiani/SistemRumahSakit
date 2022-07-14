@@ -396,6 +396,22 @@ public class Controller {
         return name;
     }
 
+    public static String getStaffNameById(int id) {
+        conn.connect();
+        String name = "";
+        String query = "SELECT * FROM staff WHERE id='" + id + "'";
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                name = rs.getString("fullName");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return name;
+    }
+
     public static String getRoleById(int id) {
         conn.connect();
         String role = "";
