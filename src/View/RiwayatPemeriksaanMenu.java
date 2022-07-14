@@ -6,7 +6,7 @@
 package View;
 
 import Model.Pemeriksaan;
-import View.RiwayatPemeriksaanPilihDokterMenu;
+import View.PilihDokter;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
