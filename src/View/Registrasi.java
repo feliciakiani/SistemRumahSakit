@@ -100,7 +100,7 @@ public class Registrasi extends JFrame {
         setLocationRelativeTo(null);
         setLayout(null);
         setVisible(true);
-        setTitle("Registrasi");
+        setTitle("Registrasi Pasien");
         setSize(500, 325);
 
     }
