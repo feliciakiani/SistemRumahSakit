@@ -362,26 +362,23 @@ public class Controller {
         }
     }
     
-    public static boolean updatePasien(Pasien pasien) {
+    public static boolean updatePasien(int _idPasien, String _firstName, String _lastName, String _email, String _address, String _phone, Date _dob, char _gender) {
         conn.connect();
-        String query = "UPDATE INTO pasien VALUES(?,?,?,?,?,?,?,?)";
+        String query = "UPDATE pasien SET firstName='" + _firstName + "', lastName='"
+                + _lastName + "', email='" + _email + "', address='"
+                + _address + "', phone='" + _phone + "', dob='"
+                + _dob + "', gender='" + _gender + "'" + "WHERE idPasien='" + _idPasien + "'";
         try {
-            PreparedStatement stmt = conn.con.prepareStatement(query);
-            stmt.setInt(1, pasien.getIdPasien());
-            stmt.setString(2, pasien.getFirstName());
-            stmt.setString(3, pasien.getLastName());
-            stmt.setString(4, pasien.getEmail());
-            stmt.setString(5, pasien.getAddress());
-            stmt.setString(6, pasien.getPhone());
-            stmt.setDate(7, java.sql.Date.valueOf(pasien.getDob()));
-            stmt.setString(8, pasien.getGender());
-            stmt.executeUpdate();
+            Statement stmt = conn.con.createStatement();
+            stmt.executeUpdate(query);
+            conn.disconnect();
             return (true);
         } catch (SQLException e) {
             e.printStackTrace();
+            conn.disconnect();
             return (false);
         }
-     }
+    }
     
     public static int getIdByEmail(String email) {
         conn.connect();

@@ -5,6 +5,7 @@
  */
 package View;
 
+import Model.ActiveUserID;
 import Model.Pasien;
 import Model.UserTypeEnum;
 import java.awt.Color;
@@ -36,8 +37,8 @@ import org.jdatepicker.impl.UtilDateModel;
 public class UpdatePasien {
     JFrame frame;
     JPanel panel;
-    JLabel labelThisMenuUpdatePasien, labelJudul, labelFirstNamePasien, labelLastNamePasien, labelEmailPasien, labelAddressPasien, labelPhonePasien, labelDobPasien, labelGenderPasien;
-    JTextField tfFirstName, tfLastName, tfEmail, tfAddress, tfPhone;
+    JLabel labelThisMenuUpdatePasien, labelJudul, labelFirstNamePasien, labelLastNamePasien, labelEmailPasien, labelPasswordPasien, labelAddressPasien, labelPhonePasien, labelDobPasien, labelGenderPasien;
+    JTextField tfFirstName, tfLastName, tfEmail, tfPassword, tfAddress, tfPhone;
     JRadioButton rbGenderM, rbGenderF;
     LocalDate tanggalLahir;
     Date tanggalLahirSQL;
@@ -49,6 +50,7 @@ public class UpdatePasien {
     
     public UpdatePasien() {
         Pasien pasien = new Pasien();
+        ActiveUserID idPasien = ActiveUserID.ActiveUserID();
         frame = new JFrame("Menu Update Pasien");
         frame.setSize(500, 480);
 
@@ -141,13 +143,12 @@ public class UpdatePasien {
         btnUpdate.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                
                 if (!tfFirstName.getText().equals("") && !tfLastName.getText().equals("") && !tfEmail.getText().equals("") && !tfAddress.getText().equals("") && !tfPhone.getText().equals("") && (!rbGenderM.isSelected() || !rbGenderF.isSelected())) {
                     tanggalLahir = new java.sql.Date( tanggalLahirSQL.getTime() ).toLocalDate();
+                    java.sql.Date tanggalLahirSQL = java.sql.Date.valueOf(tanggalLahir);
                     if (tanggalLahir != null) {
                         frame.setVisible(false);
-                        Pasien pasien = new Pasien(0, UserTypeEnum.PENGGUNA,tfFirstName.getText(), tfLastName.getText(), tfEmail.getText(), tfAddress.getText(), tfPhone.getText(), tanggalLahir, gender);
-                        c.updatePasien(pasien);
+                        c.updatePasien(idPasien.getUserID(), tfFirstName.getText(), tfLastName.getText(), tfEmail.getText(), tfAddress.getText(), tfPhone.getText(), tanggalLahirSQL, gender);
                         JOptionPane.showMessageDialog(null, "pasien berhasil terupdate", "Menu Update Pasien", JOptionPane.INFORMATION_MESSAGE);
                         new PasienMainMenu();
                     } else {
