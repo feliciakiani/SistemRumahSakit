@@ -97,7 +97,7 @@ public class Login extends JFrame {
         setLocationRelativeTo(null);
         setLayout(null);
         setVisible(true);
-        setTitle("Login");
+        setTitle("Login Pasien");
         setSize(500, 325);
 
     }

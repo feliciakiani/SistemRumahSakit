@@ -118,15 +118,15 @@ public class PasienMainMenu {
             }
         });
 
-        btnBackToMainMenu = new JButton("Back to Main Menu");
+        btnBackToMainMenu = new JButton("Log Out");
         btnBackToMainMenu.setBounds(160, 460, 150, 40);
         btnBackToMainMenu.setBackground(Color.white);
         btnBackToMainMenu.setForeground(Color.BLACK);
         btnBackToMainMenu.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                frame.setVisible(false);
-//                new MainMenu();
+                frame.dispose();
+                new Login();
             }
         });
 
