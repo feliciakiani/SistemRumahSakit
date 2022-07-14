@@ -141,16 +141,20 @@ public class UpdatePasien {
         btnUpdate.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                tanggalLahir = new java.sql.Date( tanggalLahirSQL.getTime() ).toLocalDate();
-                if (!tfFirstName.getText().equals("") && !tfLastName.getText().equals("") && !tfEmail.getText().equals("") && !tfAddress.getText().equals("") && !tfPhone.getText().equals("") && (!rbGenderM.isSelected() || !rbGenderF.isSelected()) && tanggalLahir != null) {
-                    frame.setVisible(false);
-                    Pasien pasien = new Pasien(0, UserTypeEnum.PENGGUNA,tfFirstName.getText(), tfLastName.getText(), tfEmail.getText(), tfAddress.getText(), tfPhone.getText(), tanggalLahir, gender);
-                    c.updatePasien(pasien);
-                    JOptionPane.showMessageDialog(null, "pasien berhasil terupdate", "Menu Update Pasien", JOptionPane.INFORMATION_MESSAGE);
-                    new PasienMainMenu();
+                
+                if (!tfFirstName.getText().equals("") && !tfLastName.getText().equals("") && !tfEmail.getText().equals("") && !tfAddress.getText().equals("") && !tfPhone.getText().equals("") && (!rbGenderM.isSelected() || !rbGenderF.isSelected())) {
+                    tanggalLahir = new java.sql.Date( tanggalLahirSQL.getTime() ).toLocalDate();
+                    if (tanggalLahir != null) {
+                        frame.setVisible(false);
+                        Pasien pasien = new Pasien(0, UserTypeEnum.PENGGUNA,tfFirstName.getText(), tfLastName.getText(), tfEmail.getText(), tfAddress.getText(), tfPhone.getText(), tanggalLahir, gender);
+                        c.updatePasien(pasien);
+                        JOptionPane.showMessageDialog(null, "pasien berhasil terupdate", "Menu Update Pasien", JOptionPane.INFORMATION_MESSAGE);
+                        new PasienMainMenu();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "tanggal lahir kosong", "Menu Update Pasien", JOptionPane.ERROR_MESSAGE);
+                    }
                 } else {
                     frame.setVisible(false);
-                    System.out.println(tfFirstName.getText() + tfLastName.getText() + tfEmail.getText() + tfAddress.getText() + tfPhone.getText() + gender + tanggalLahir);
                     JOptionPane.showMessageDialog(null, "masih ada data yang kosong", "Menu Update Pasien", JOptionPane.ERROR_MESSAGE);
                     new UpdatePasien();
                 }
