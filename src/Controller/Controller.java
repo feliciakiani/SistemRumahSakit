@@ -77,6 +77,7 @@ public class Controller {
     // SELECT ALL from table pasien BY first and last name
     public static Pasien getPasien(String _firstName, String _lastName) {
         Pasien pasien = new Pasien();
+        String genderNull = "X";
         conn.connect();
         String query = "SELECT * FROM pasien WHERE firstName='" + _firstName + "'&&lastName='" + _lastName + "'";
         try {
@@ -89,8 +90,16 @@ public class Controller {
                 pasien.setEmail(rs.getString("email"));
                 pasien.setAddress(rs.getString("address"));
                 pasien.setPhone(rs.getString("phone"));
-                pasien.setDob(rs.getDate("dob").toLocalDate());
-                pasien.setGender(rs.getString("gender").charAt(0));
+                if (rs.getDate("dob") == null) {
+                    pasien.setDob(null);
+                } else {
+                    pasien.setDob(rs.getDate("dob").toLocalDate());
+                }
+                if (rs.getString("gender") == null) {
+                    pasien.setGender(genderNull.charAt(0));
+                } else {
+                    pasien.setGender(rs.getString("gender").charAt(0));
+                }
                 // ADA VAR PENYAKIT DI DB
             }
         } catch (SQLException e) {

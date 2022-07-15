@@ -5,6 +5,7 @@
  */
 package View;
 
+import Model.ActiveUserID;
 import Model.Pasien;
 import java.awt.Color;
 import java.awt.Font;
@@ -28,7 +29,9 @@ public class LihatProfiledanUpdatePasien {
     JLabel labelThisMenu, labelPilihMenu;
     JButton btnUpdate, btnLihat;
 
+    Controller.Controller controller = new Controller.Controller();
     Controller.PasienFunction p = new Controller.PasienFunction();
+    ActiveUserID idPasien = ActiveUserID.ActiveUserID();
 
     public LihatProfiledanUpdatePasien(String _firstName, String _lastName) {
         frame = new JFrame("Menu Lihat Profile atau Update Pasien");
@@ -52,7 +55,7 @@ public class LihatProfiledanUpdatePasien {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 frame.setVisible(false);
-                p.lihatProfile(_firstName, _lastName);
+                p.lihatProfile(controller.getFirstNameById(idPasien.getUserID()), controller.getLastNameById(idPasien.getUserID()));
                 new PasienMainMenu();
             }
         });
