@@ -103,10 +103,10 @@ public class ShowFormUpdateKoas {
                 updateKoas = a.updateDataKoas(_idKoas, tfFirstName.getText(), tfLastName.getText(), tfEmail.getText(), tfAddress.getText(), tfPhone.getText(), dateDob, charGender, tfUniversitas.getText());
                 if (updateKoas == true) {
                     JOptionPane.showMessageDialog(null, "Update berhasil!", "Update Data Koas", JOptionPane.INFORMATION_MESSAGE);
-                    new UpdateKoasMenu();
+                    new AdminMainMenu();
                 } else {
                     JOptionPane.showMessageDialog(null, "Update gagal!", "Update Data Koas", JOptionPane.ERROR_MESSAGE);
-                    new UpdateKoasMenu();
+                    new AdminMainMenu();
                 }
             }
         });

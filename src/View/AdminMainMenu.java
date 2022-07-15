@@ -123,7 +123,7 @@ public class AdminMainMenu {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 frame.setVisible(false);
-//                new MainMenu();
+                new Login();
             }
         });
         
@@ -136,6 +136,7 @@ public class AdminMainMenu {
         panel.add(btnUpdateDokter);
         panel.add(btnUpdateKoas);
         panel.add(btnUpdateJadwal);
+        panel.add(btnBackToMainMenu);
         frame.add(panel);
         
         // Init

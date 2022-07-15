@@ -76,10 +76,10 @@ public class ShowFormUpdateJadwal {
                 updateDokter = a.updateJadwalPemeriksaan( _idDokter, intJamMulai, intJamSelesai);
                 if (updateDokter == true) {
                     JOptionPane.showMessageDialog(null, "Update berhasil!", "Update Jadwal Pemeriksaan Dokter", JOptionPane.INFORMATION_MESSAGE);
-                    new UpdateJadwalMenu();
+                    new AdminMainMenu();
                 } else {
                     JOptionPane.showMessageDialog(null, "Update gagal!", "Update Jadwal Pemeriksaan Dokter", JOptionPane.ERROR_MESSAGE);
-                    new UpdateJadwalMenu();
+                    new AdminMainMenu();
                 }
 
             }
