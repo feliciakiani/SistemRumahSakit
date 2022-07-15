@@ -24,7 +24,7 @@ public class AdminMainMenu {
     
     JLabel labelSelamatDatang, labelPilihMenu, lbIdSpesialis, lbFirstName, lbLastName, lbEmail, lbAddress, lbPhone, lbDob, lbGender, lbJamMulai, lbJamSelesai, lbUniversitas;
     JTextField tfIdSpesialis, tfFirstName, tfLastName, tfEmail, tfAddress, tfPhone, tfDob, tfGender, tfJamMulai, tfJamSelesai, tfUniversitas;
-    JButton btnRegistDokter, btnRegistKoas, btnRiwayatPemeriksaan, btnUpdateDokter, btnUpdateKoas, btnUpdateJadwal, btnBackToMainMenu;
+    JButton btnRegistDokter, btnRegistKoas, btnRiwayatPemeriksaan, btnUpdateDokter, btnUpdateKoas, btnUpdateJadwal, btnLogout;
 
     Controller.AdminFunctions a = new Controller.AdminFunctions();
     Controller.Controller controller = new Controller.Controller();
@@ -32,10 +32,10 @@ public class AdminMainMenu {
     public AdminMainMenu(){
         
         frame = new JFrame("Menu Admin");
-        frame.setSize(500, 510);
+        frame.setSize(500, 570);
 
         panel = new JPanel();
-        panel.setSize(500, 510);
+        panel.setSize(500, 570);
 
         ActiveUserID idManager = ActiveUserID.ActiveUserID();
         labelSelamatDatang = new JLabel("<html>Selamat datang " + controller.getStaffNameById(idManager.getUserID()));
@@ -115,11 +115,11 @@ public class AdminMainMenu {
             }
         });
         
-        btnBackToMainMenu = new JButton("Back to Main Menu");
-        btnBackToMainMenu.setBounds(160, 360, 150, 40);
-        btnBackToMainMenu.setBackground(Color.white);
-        btnBackToMainMenu.setForeground(Color.BLACK);
-        btnBackToMainMenu.addActionListener(new ActionListener() {
+        btnLogout = new JButton("Back to Main Menu");
+        btnLogout.setBounds(145, 460, 200, 40);
+        btnLogout.setBackground(Color.white);
+        btnLogout.setForeground(Color.BLACK);
+        btnLogout.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 frame.setVisible(false);
@@ -136,7 +136,7 @@ public class AdminMainMenu {
         panel.add(btnUpdateDokter);
         panel.add(btnUpdateKoas);
         panel.add(btnUpdateJadwal);
-        panel.add(btnBackToMainMenu);
+        panel.add(btnLogout);
         frame.add(panel);
         
         // Init
@@ -147,5 +147,8 @@ public class AdminMainMenu {
         frame.setVisible(true);
     }
     
+    public static void main(String[] args) {
+        new AdminMainMenu();
+    }
 
 }
