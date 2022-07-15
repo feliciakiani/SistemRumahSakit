@@ -114,8 +114,5 @@ public class ManagerPendapatanDokterMenu {
         frame.setVisible(true);
     }
 
-    public static void main(String[] args) {
-        new ManagerPendapatanDokterMenu();
-    }
 
 }

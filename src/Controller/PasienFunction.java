@@ -16,10 +16,7 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
-/**
- *
- * @author User
- */
+
 public class PasienFunction {
     public void lihatAntrianPasien(int _idPasien) {
         ArrayList<Antrian> listAllAntiran = new ArrayList<>();

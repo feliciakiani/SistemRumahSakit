@@ -116,7 +116,4 @@ public class ManagerPendapatanSpesialisMenu {
 
     }
 
-    public static void main(String[] args) {
-        new ManagerPendapatanSpesialisMenu();
-    }
 }

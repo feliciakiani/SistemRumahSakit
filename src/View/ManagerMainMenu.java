@@ -128,8 +128,5 @@ public class ManagerMainMenu {
         frame.add(panel);
     }
 
-    public static void main(String[] args) {
-        new ManagerMainMenu();
-    }
 
 }

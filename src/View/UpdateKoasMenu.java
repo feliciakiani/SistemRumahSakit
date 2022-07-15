@@ -21,10 +21,7 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
-/**
- *
- * @author Sheren
- */
+
 public class UpdateKoasMenu {
 
     JFrame frame;
@@ -116,7 +113,7 @@ public class UpdateKoasMenu {
         panel.add(labelPilihKoas);
         frame.add(panel);
 
-//        // Init
+        // Init
         panel.setLayout(null);
         panel.setVisible(true);
         frame.setLocationRelativeTo(null);
@@ -124,7 +121,5 @@ public class UpdateKoasMenu {
         frame.setVisible(true);
     }
 
-    public static void main(String[] args) {
-        new UpdateKoasMenu();
-    }
+
 }

@@ -17,10 +17,7 @@ import javax.swing.JTextField;
 
 import Model.ActiveUserID;
 
-/**
- *
- * @author Sheren
- */
+
 public class AdminMainMenu {
     JFrame frame;
     JPanel panel;
@@ -149,7 +146,5 @@ public class AdminMainMenu {
         frame.setVisible(true);
     }
     
-    public static void main(String[] args) {
-        new AdminMainMenu();
-    }
+
 }

@@ -21,10 +21,7 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
-/**
- *
- * @author Sheren
- */
+
 public class UpdateDokterMenu {
 
     JFrame frame;
@@ -125,7 +122,4 @@ public class UpdateDokterMenu {
         frame.setVisible(true);
     }
 
-    public static void main(String[] args) {
-        new UpdateDokterMenu();
-    }
 }

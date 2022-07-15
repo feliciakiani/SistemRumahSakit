@@ -183,7 +183,5 @@ public class DaftarOnlinePemeriksaan {
         }
     }
     
-    public static void main(String[] args) {
-        new DaftarOnlinePemeriksaan();
-    }
+
 }

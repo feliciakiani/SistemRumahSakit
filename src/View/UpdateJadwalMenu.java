@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package View;
+
 import Model.Dokter;
 import java.awt.Color;
 import java.awt.Font;
@@ -20,11 +21,8 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
-/**
- *
- * @author Sheren
- */
 public class UpdateJadwalMenu {
+
     JFrame frame;
     JPanel panel;
     JLabel labelThisMenu, labelPilihDokter, lbThisMenu;
@@ -32,12 +30,12 @@ public class UpdateJadwalMenu {
     JRadioButton[] rbListDokter;
     ButtonGroup bgListDokter;
     String _firstName = "", _lastName = "";
-    int _idDokter=0, _jamMulai=0, _jamSelesai=0;
+    int _idDokter = 0, _jamMulai = 0, _jamSelesai = 0;
 
     Controller.AdminFunctions a = new Controller.AdminFunctions();
-    
-    public UpdateJadwalMenu(){
-    final ArrayList<Dokter> listAllDokter = Controller.Controller.getAllDokter();
+
+    public UpdateJadwalMenu() {
+        final ArrayList<Dokter> listAllDokter = Controller.Controller.getAllDokter();
         int y = 90;
 
         frame = new JFrame("Menu Admin");
@@ -75,8 +73,8 @@ public class UpdateJadwalMenu {
                 }
             });
             bgListDokter.add(rbListDokter[i]);
-        }   
-        
+        }
+
         btnSearch = new JButton("Search");
         btnSearch.setBounds(180, 560, 100, 50);
         btnSearch.setBackground(Color.yellow);
@@ -96,8 +94,8 @@ public class UpdateJadwalMenu {
 
         }
         );
-    
-    //Add
+
+        //Add
         panel.add(btnSearch);
         for (int i = 0;
                 i < Controller.Controller.getAllDokter()
@@ -108,7 +106,7 @@ public class UpdateJadwalMenu {
         panel.add(labelPilihDokter);
         frame.add(panel);
 
-//        // Init
+        // Init
         panel.setLayout(null);
         panel.setVisible(true);
         frame.setLocationRelativeTo(null);
@@ -116,7 +114,4 @@ public class UpdateJadwalMenu {
         frame.setVisible(true);
     }
 
-    public static void main(String[] args) {
-        new UpdateJadwalMenu();
-    }
 }

@@ -215,8 +215,5 @@ public class UpdatePasien {
             return "";
         }
     }
-    
-    public static void main(String[] args) {
-        new UpdatePasien();
-    }
+
 }

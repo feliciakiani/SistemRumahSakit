@@ -105,7 +105,4 @@ public class Registrasi extends JFrame {
 
     }
 
-    public static void main(String[] args) {
-        new Registrasi();
-    }
 }
