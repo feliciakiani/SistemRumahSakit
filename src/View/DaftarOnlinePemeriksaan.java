@@ -5,6 +5,7 @@
  */
 package View;
 
+import Model.ActiveUserID;
 import Model.Antrian;
 import Model.Dokter;
 import java.awt.Color;
@@ -54,6 +55,7 @@ public class DaftarOnlinePemeriksaan {
     
     public DaftarOnlinePemeriksaan() {
         final ArrayList<Dokter> listAllDokter = Controller.Controller.getAllDokter();
+        ActiveUserID idPasien = ActiveUserID.ActiveUserID();
         int yDokter = 90;
 
         frame = new JFrame("Menu Daftar Online");
@@ -109,7 +111,7 @@ public class DaftarOnlinePemeriksaan {
                         JOptionPane.showMessageDialog(null, "tanggal periksa tidak bisa sebelum hari ini", "Menu Daftar Online", JOptionPane.ERROR_MESSAGE);
                         new DaftarOnlinePemeriksaan();
                     } else {
-                        Antrian antrian2 = new Antrian(0, _idSpesialisDokter, _idDokter, 5, java.time.LocalDate.now(), tanggalPeriksa); // kolom 4 ganti id pasien
+                        Antrian antrian2 = new Antrian(0, _idSpesialisDokter, _idDokter, idPasien.getUserID(), java.time.LocalDate.now(), tanggalPeriksa); // kolom 4 ganti id pasien
                         c.insertAntrian(antrian2);
                         JOptionPane.showMessageDialog(null, "insert antrian ke database berhasil", "Menu Daftar Online", JOptionPane.INFORMATION_MESSAGE);
                         new PasienMainMenu();
