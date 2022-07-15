@@ -31,9 +31,6 @@ public class LihatProfiledanUpdatePasien {
     Controller.PasienFunction p = new Controller.PasienFunction();
 
     public LihatProfiledanUpdatePasien(String _firstName, String _lastName) {
-
-        final Pasien pasien = Controller.Controller.getPasien(_firstName, _lastName);
-
         frame = new JFrame("Menu Lihat Profile atau Update Pasien");
         frame.setSize(480, 300);
 

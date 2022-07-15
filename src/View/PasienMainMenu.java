@@ -51,7 +51,7 @@ public class PasienMainMenu {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 frame.setVisible(false);
-                new LihatProfiledanUpdatePasien("hansel", "raphaelo"); //first name dan last name
+                new LihatProfiledanUpdatePasien(controller.getFirstNameById(idPasien.getUserID()), controller.getLastNameById(idPasien.getUserID()));
             }
         });
 
@@ -63,8 +63,8 @@ public class PasienMainMenu {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 frame.setVisible(false);
-                p.melakukanPembayaran(idPasien.getUserID()); //idPasien
-                new LihatPembayaranPasien(idPasien.getUserID()); //idPasien
+                p.melakukanPembayaran(idPasien.getUserID());
+                new LihatPembayaranPasien(idPasien.getUserID());
             }
         });
 
@@ -76,7 +76,7 @@ public class PasienMainMenu {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 frame.setVisible(false);
-                p.lihatAntrianPasien(idPasien.getUserID()); //idPasien
+                p.lihatAntrianPasien(idPasien.getUserID());
                 new PasienMainMenu();
             }
         });
@@ -113,7 +113,7 @@ public class PasienMainMenu {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 frame.setVisible(false);
-                p.lihatRiwayatPemeriksaan(idPasien.getUserID()); //masukin id pasien
+                p.lihatRiwayatPemeriksaan(idPasien.getUserID());
                 new PasienMainMenu();
             }
         });
