@@ -29,10 +29,7 @@ import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.SqlDateModel;
 
-/**
- *
- * @author Sheren
- */
+
 public class RegistDokterMenu {
     JFrame frame;
     JPanel panel;
@@ -180,8 +177,5 @@ public class RegistDokterMenu {
         frame.setLayout(null);
         frame.setVisible(true);
     }
-    
-    public static void main(String[] args) {
-        new RegistDokterMenu();
-    }
+
 }

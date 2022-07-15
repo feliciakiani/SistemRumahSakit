@@ -150,7 +150,4 @@ public class PasienMainMenu {
         frame.add(panel);
     }
 
-    public static void main(String[] args) {
-        new PasienMainMenu();
-    }
 }

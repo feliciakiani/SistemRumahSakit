@@ -19,10 +19,7 @@ import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Locale;
 
-/**
- *
- * @author Sheren
- */
+
 public class AdminFunctions {
 
     static DatabaseHandler conn = new DatabaseHandler();

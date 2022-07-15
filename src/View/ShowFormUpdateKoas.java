@@ -21,10 +21,6 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
-/**
- *
- * @author Sheren
- */
 public class ShowFormUpdateKoas {
 
     JFrame frame;
@@ -34,7 +30,7 @@ public class ShowFormUpdateKoas {
     JButton btSubmitUpdateKoas;
     String _firstName = "", _lastName = "", _email = "", _address = "", _phone = "", _dob = "", _gender = "", _universitas = "";
     int _idKoas = 0;
-    
+
     Controller.AdminFunctions a = new Controller.AdminFunctions();
 
     public ShowFormUpdateKoas(int _idKoas, String _firstName, String _lastName, String _email, String _address, String _phone, String _dob, String _gender, String _universitas) {
@@ -114,31 +110,31 @@ public class ShowFormUpdateKoas {
                 }
             }
         });
-        
-        panel.add(lbFirstName);
-                panel.add(lbLastName);
-                panel.add(lbEmail);
-                panel.add(lbAddress);
-                panel.add(lbPhone);
-                panel.add(lbDob);
-                panel.add(lbGender);
-                panel.add(lbUniversitas);
-                panel.add(tfFirstName);
-                panel.add(tfLastName);
-                panel.add(tfEmail);
-                panel.add(tfAddress);
-                panel.add(tfPhone);
-                panel.add(tfDob);
-                panel.add(tfGender);
-                panel.add(tfUniversitas);
-                panel.add(btSubmitUpdateKoas);
-                frame.add(panel);
 
-                // Init
-                panel.setLayout(null);
-                panel.setVisible(true);
-                frame.setLocationRelativeTo(null);
-                frame.setLayout(null);
-                frame.setVisible(true);
+        panel.add(lbFirstName);
+        panel.add(lbLastName);
+        panel.add(lbEmail);
+        panel.add(lbAddress);
+        panel.add(lbPhone);
+        panel.add(lbDob);
+        panel.add(lbGender);
+        panel.add(lbUniversitas);
+        panel.add(tfFirstName);
+        panel.add(tfLastName);
+        panel.add(tfEmail);
+        panel.add(tfAddress);
+        panel.add(tfPhone);
+        panel.add(tfDob);
+        panel.add(tfGender);
+        panel.add(tfUniversitas);
+        panel.add(btSubmitUpdateKoas);
+        frame.add(panel);
+
+        // Init
+        panel.setLayout(null);
+        panel.setVisible(true);
+        frame.setLocationRelativeTo(null);
+        frame.setLayout(null);
+        frame.setVisible(true);
     }
 }

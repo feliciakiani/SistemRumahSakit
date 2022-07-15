@@ -20,10 +20,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
-/**
- *
- * @author Sheren
- */
+
 public class RiwayatPemeriksaanMenu {
     JFrame frame;
     JPanel panel;
@@ -80,9 +77,6 @@ public class RiwayatPemeriksaanMenu {
         frame.setVisible(true);
     }
 
-    public static void main(String[] args) {
-        new RiwayatPemeriksaanMenu(1);
-    }
 
 }
 

@@ -29,10 +29,7 @@ import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.SqlDateModel;
 
-/**
- *
- * @author Sheren
- */
+
 public class RegistKoasMenu {
     JFrame frame;
     JPanel panel;
